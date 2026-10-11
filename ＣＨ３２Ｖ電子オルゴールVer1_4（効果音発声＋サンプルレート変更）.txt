@@ -1,0 +1,61 @@
+先日は、ＰＵＹＡ電子オルゴールで効果音発声とサンプルレート変更の機能追加を行った。それを、ＣＨ３２Ｖ電子オルゴールにも移植した。
+
+設計と実装はＰＵＹＡ電子オルゴールと同じなので、詳細は下記を参照。
+<a href="http://tutujith.blog.fc2.com/blog-entry-987.html" target="_blank" title="ＰＵＹＡ電子オルゴールVer1_4（効果音発声）"><span style="color:#FF0000"><strong>ＰＵＹＡ電子オルゴールVer1_4（効果音発声）</strong></span></a>
+<a href="http://tutujith.blog.fc2.com/blog-entry-989.html" target="_blank" title="ＰＵＹＡ電子オルゴールVer1_4（効果音サンプルレート変更）"><span style="color:#FF0000"><strong>ＰＵＹＡ電子オルゴールVer1_4（効果音サンプルレート変更）</strong></span></a>
+
+設計資料とプロジェクト一式は　　<a href="https://drive.google.com/file/d/1VTEDq0syiOJBNhCu1rtrU9yLFlnYymse/view?usp=sharing" target="_blank" title="ここから"><span style="color:#FF0000"><strong>ここから</strong></span></a>　ダウンロードできる。
+
+サンプルプロジェクトのディレクトリは
+効果音発声　orgel_SW_V002F4P6-DRIVE
+効果音サンプルレート変更　orgel_SW_V002F4P6-PEDAL
+
+
+【不具合事象】
+
+①効果音の音源波形データは、その先頭部分にサンプル数（実際の設定値は－１した値）を持たせている。
+<a href="http://tutujith.blog.fc2.com/img/20260101144812545.jpg/" target="_blank"><img src="https://blog-imgs-169.fc2.com/t/u/t/tutujith/20260101144812545.jpg" alt="ＣＨ３２Ｖ電子オルゴールVer1_4（効果音発声＋サンプルレート変更）効果音波形データの枠組み" border="0" width="618" height="148" /></a>
+
+②サンプル数は　ｕｎｓｉｇｎｅｄ　ｓｈｏｒｔ　なので、２バイト境界に配置する必要がある。
+
+・そのため、音源波形データ（例えば、effect_KANE.asm）の先頭部分に　「．ａｌｉｇｎ　２」　を書いている。
+<a href="http://tutujith.blog.fc2.com/img/202601011444561b9.jpg/" target="_blank"><img src="https://blog-imgs-169.fc2.com/t/u/t/tutujith/202601011444561b9.jpg" alt="ＣＨ３２Ｖ電子オルゴールVer1_4（効果音発声＋サンプルレート変更）効果音波形データのソースコード" border="0" width="388" height="182" /></a>
+
+・２バイト境界にするためには　「．ａｌｉｇｎ　１」　でよいハズなのだが、そう書くと１バイト境界になってしまう。これが不具合事象だ。
+
+・「．ａｌｉｇｎ　１」　と書いたときのリンクリストは下記のとおり、奇数バイトに配置されている。
+<a href="http://tutujith.blog.fc2.com/img/20260101143920345.jpg/" target="_blank"><img src="https://blog-imgs-169.fc2.com/t/u/t/tutujith/20260101143920345.jpg" alt="ＣＨ３２Ｖ電子オルゴールVer1_4（効果音発声＋サンプルレート変更）不良時のリンクリスト " border="0" width="501" height="157" /></a>
+
+③「．ａｌｉｇｎ」のパラメータの書き方はコンパイラ（アセンブラ）によって、２種類があるそうだ。
+
+・１つは、ｎバイト境界のｎの値を書く。
+
+・もう一つは、２のｎ乗バイト境界のｎの値を書く。
+
+・ＭｏｕｎＲｉｖｅｒＳｔｕｄｉｏの場合は後者のようだ。その根拠は「．ａｌｉｇｎ　８」と書くと２５６バイト境界になることが確認できているからだ。
+
+・不具合事象の事情は判らないが、　「．ａｌｉｇｎ　２」　で４バイト境界を要求することにした。
+
+④「．ａｌｉｇｎ　２」　の次行に　「．ｈｗｏｒｄ　を置かないと下記のｂｕｉｌｄエラーが出る。これが２つ目の不具合だ。
+
+06:58:08 **** Build of configuration obj for project orgel_SW_V002F4p6-DRIVE ****
+make -j2 all 
+In file included from ../User/../../dev_V002F4P6.c:40,
+                 from ../User/main.c:406:
+../User/../../common.c:27:13: warning: 'wait_1us' defined but not used [-Wunused-function]
+   27 | static void wait_1us(void)
+      |             ^~~~~~~~
+c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/bin/ld.exe: ./User/song_idx.o(.text+0xb95): <span style="color:#0000FF"><strong>3 bytes required for alignment to 4-byte boundary, but only 2 present</strong></span>
+c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/bin/ld.exe: can't relax section: bad value
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:53: orgel_SW_V002F4p6-DRIVE.elf] Error 1
+
+06:58:10 Build Failed. 3 errors, 1 warnings. (took 2s.516ms)
+
+・「．ａｌｉｇｎ　２」　は４バイト境界と認識されている。
+
+・「要求されるバウンダリに必要なエリアが足りない」と言っているので、２バイト分の隙間を入れてみた。すると、ｂｕｉｌｄエラーは出なくなった。
+
+・不具合事象の事情は判らないが、おまじないとして　「.hword 0xffff」　を置くことにした。
+
+⑤これらの「不具合事象」の事情が判る方が居られたら、ご教示をいただきたい。なお、ＭｏｕｎＲｉｖｅｒＳｔｕｄｉｏはＶ１．９２を使用。

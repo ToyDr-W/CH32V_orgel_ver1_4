@@ -1,0 +1,14 @@
+06:58:08 **** Build of configuration obj for project orgel_SW_V002F4p6-DRIVE ****
+make -j2 all 
+In file included from ../User/../../dev_V002F4P6.c:40,
+                 from ../User/main.c:406:
+../User/../../common.c:27:13: warning: 'wait_1us' defined but not used [-Wunused-function]
+   27 | static void wait_1us(void)
+      |             ^~~~~~~~
+c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/bin/ld.exe: ./User/song_idx.o(.text+0xb95): 3 bytes required for alignment to 4-byte boundary, but only 2 present
+c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/bin/ld.exe: can't relax section: bad value
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:53: orgel_SW_V002F4p6-DRIVE.elf] Error 1
+
+06:58:10 Build Failed. 3 errors, 1 warnings. (took 2s.516ms)
+
