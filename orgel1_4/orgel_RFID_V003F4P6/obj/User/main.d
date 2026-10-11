@@ -1,0 +1,89 @@
+User/main.o: ../User/main.c \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Core/core_riscv.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/system_ch32v00x.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/ch32v00x_conf.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_adc.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_dbgmcu.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_dma.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_exti.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_flash.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_gpio.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_i2c.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/ch32v00x_it.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Debug/debug.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_iwdg.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_misc.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_pwr.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_rcc.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_spi.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_tim.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_usart.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_wwdg.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_opa.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x.h \
+ ../User/orgel_cnf.h ../User/../../orgel.h ../User/../../dev_V003F4P6.c \
+ ../User/../../common.c ../User/../../orgel.c ../User/../../dev_PWM.c \
+ ../User/../../apl_RFID.c ../User/../../func_RFID.c
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Core/core_riscv.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/system_ch32v00x.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/ch32v00x_conf.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_adc.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_dbgmcu.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_dma.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_exti.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_flash.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_gpio.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_i2c.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\User/ch32v00x_it.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Debug/debug.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_iwdg.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_misc.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_pwr.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_rcc.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_spi.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_tim.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_usart.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_wwdg.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x_opa.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_RFID_V003F4P6\Peripheral\inc/ch32v00x.h:
+
+../User/orgel_cnf.h:
+
+../User/../../orgel.h:
+
+../User/../../dev_V003F4P6.c:
+
+../User/../../common.c:
+
+../User/../../orgel.c:
+
+../User/../../dev_PWM.c:
+
+../User/../../apl_RFID.c:
+
+../User/../../func_RFID.c:
