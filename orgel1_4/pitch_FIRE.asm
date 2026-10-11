@@ -1,0 +1,60 @@
+#ifndef def_pitch_FIRE
+#define def_pitch_FIRE
+
+	.globl	pitch_FIRE
+pitch_FIRE:
+	.byte	pitch_FIRE_end-pitch_FIRE-2
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	-1
+	.byte	-2
+	.byte	-3
+	.byte	-4
+	.byte	-5
+	.byte	-6
+	.byte	-7
+	.byte	-8
+	.byte	-9
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	0
+pitch_FIRE_end:
+#endif

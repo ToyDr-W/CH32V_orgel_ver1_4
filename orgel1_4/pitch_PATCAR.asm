@@ -1,0 +1,60 @@
+#ifndef def_pitch_PATCAR
+#define def_pitch_PATCAR
+
+	.globl	pitch_PATCAR
+pitch_PATCAR:
+	.byte	pitch_PATCAR_end-pitch_PATCAR-2
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	20
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	10
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	0
+	.byte	-1
+	.byte	-2
+	.byte	-3
+	.byte	-4
+	.byte	-5
+	.byte	-6
+	.byte	-7
+	.byte	-8
+	.byte	-9
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	-10
+	.byte	0
+pitch_PATCAR_end:
+#endif
