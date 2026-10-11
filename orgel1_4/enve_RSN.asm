@@ -1,0 +1,71 @@
+#ifndef def_enve_RSN
+#define def_enve_RSN
+
+	.globl	enve_RSN
+enve_RSN:
+	.byte	enve_RSN_end-enve_RSN-2
+	.byte	255
+	.byte	230
+	.byte	207
+	.byte	190
+	.byte	175
+	.byte	163
+	.byte	153
+	.byte	145
+	.byte	138
+	.byte	131
+	.byte	124
+	.byte	118
+	.byte	112
+	.byte	107
+	.byte	101
+	.byte	96
+	.byte	92
+	.byte	87
+	.byte	83
+	.byte	78
+	.byte	75
+	.byte	71
+	.byte	67
+	.byte	64
+	.byte	61
+	.byte	58
+	.byte	55
+	.byte	52
+	.byte	49
+	.byte	47
+	.byte	45
+	.byte	42
+	.byte	40
+	.byte	38
+	.byte	36
+	.byte	35
+	.byte	33
+	.byte	31
+	.byte	30
+	.byte	28
+	.byte	27
+	.byte	25
+	.byte	24
+	.byte	23
+	.byte	22
+	.byte	21
+	.byte	20
+	.byte	19
+	.byte	18
+	.byte	17
+	.byte	16
+	.byte	15
+	.byte	14
+	.byte	14
+	.byte	13
+	.byte	12
+	.byte	12
+	.byte	11
+	.byte	11
+	.byte	10
+	.byte	10
+	.byte	9
+	.byte	9
+enve_RSN_end:
+#endif

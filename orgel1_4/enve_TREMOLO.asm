@@ -1,0 +1,70 @@
+#ifndef def_enve_TREMOLO
+#define def_enve_TREMOLO
+
+enve_TREMOLO:
+	.byte	enve_TREMOLO_end-enve_TREMOLO-2
+	.byte	255
+	.byte	246
+	.byte	178
+	.byte	115
+	.byte	222
+	.byte	214
+	.byte	155
+	.byte	100
+	.byte	193
+	.byte	187
+	.byte	135
+	.byte	87
+	.byte	168
+	.byte	163
+	.byte	118
+	.byte	76
+	.byte	147
+	.byte	142
+	.byte	103
+	.byte	66
+	.byte	128
+	.byte	123
+	.byte	89
+	.byte	58
+	.byte	111
+	.byte	107
+	.byte	78
+	.byte	50
+	.byte	97
+	.byte	94
+	.byte	68
+	.byte	44
+	.byte	84
+	.byte	81
+	.byte	59
+	.byte	38
+	.byte	73
+	.byte	71
+	.byte	51
+	.byte	33
+	.byte	64
+	.byte	62
+	.byte	45
+	.byte	29
+	.byte	56
+	.byte	54
+	.byte	39
+	.byte	25
+	.byte	48
+	.byte	47
+	.byte	34
+	.byte	22
+	.byte	42
+	.byte	41
+	.byte	30
+	.byte	19
+	.byte	37
+	.byte	36
+	.byte	26
+	.byte	17
+	.byte	32
+	.byte	31
+	.byte	22
+enve_TREMOLO_end:
+#endif
