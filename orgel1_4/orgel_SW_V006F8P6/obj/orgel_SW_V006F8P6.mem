@@ -1,0 +1,42 @@
+.text
+	|	0x000026aa	|	__riscv_save_0    	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026aa	|	__riscv_save_1    	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026aa	|	__riscv_save_2    	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026b4	|	__riscv_restore_0 	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026b4	|	__riscv_restore_1 	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026b4	|	__riscv_restore_2 	|	FUNC	|	0xa	|	HIDEEN
+	|	0x000026be	|	memset            	|	FUNC	|	0x10	|	
+	|	0x000026ce	|	song_init         	|	FUNC	|	0x78	|	
+	|	0x00002746	|	wait_pwm          	|	FUNC	|	0x14	|	
+	|	0x0000275a	|	wait_ms           	|	FUNC	|	0x42	|	
+	|	0x0000279c	|	main              	|	FUNC	|	0x81c	|	
+	|	0x00002fb8	|	TIM1_UP_IRQHandler	|	FUNC	|	0x58	|	
+	|	0x00003010	|	SystemInit        	|	FUNC	|	0x94	|	
+	|	0x00003130	|	sw_cnt            	|	OBJECT	|	0x4	|	
+	|	0x00003134	|	sw_cnf            	|	OBJECT	|	0x20	|	
+	|	0x00003154	|	onkou_tbl         	|	OBJECT	|	0x18	|	
+	|	0x0000316c	|	onkou_mei_tbl     	|	OBJECT	|	0x40	|	
+	|	0x000031ac	|	port_tbl          	|	OBJECT	|	0x15	|	
+	|	0x000031c4	|	onka_tbl          	|	OBJECT	|	0x15	|	
+
+.fini
+
+.dalign
+
+.dlalign
+
+.data
+
+.bss
+	|	0x20000000	|	sleep_tmr.0       	|	OBJECT	|	0x2	|	
+	|	0x20000002	|	kyoku             	|	OBJECT	|	0x1	|	
+	|	0x20000004	|	sw_hst            	|	OBJECT	|	0x4	|	
+	|	0x20000008	|	part              	|	OBJECT	|	0xe0	|	
+	|	0x200000e8	|	song              	|	OBJECT	|	0x10	|	
+	|	0x200000f8	|	kyotuu            	|	OBJECT	|	0x4	|	
+	|	0x200000fc	|	buf_read          	|	OBJECT	|	0x1	|	
+	|	0x200000fd	|	buf_write         	|	OBJECT	|	0x1	|	
+	|	0x20000100	|	buf               	|	OBJECT	|	0x64	|	
+
+.stack
+
