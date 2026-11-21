@@ -1,9 +1,10 @@
 User/main.o: ../User/main.c \
- C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00X.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Core/core_riscv.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\User/system_ch32v00x.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\User/ch32v00x_conf.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_adc.h \
+ C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_dbgmcu.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_dma.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_exti.h \
@@ -23,10 +24,10 @@ User/main.o: ../User/main.c \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_opa.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h \
  ../User/orgel_cnf.h ../User/../../orgel.h ../User/../../dev_V003A4M6.c \
- ../User/../../common.c ../User/../../orgel.c ../User/../../dev_PWM.c \
- ../User/../../apl_SW.c ../User/../../func_SW.c
+ ../User/../../common.c ../User/../../dev_UART.c ../User/../../orgel.c \
+ ../User/../../dev_PWM.c ../User/../../apl_SW.c ../User/../../func_SW.c
 
-C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h:
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00X.h:
 
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Core/core_riscv.h:
 
@@ -35,6 +36,8 @@ C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\User/system_ch32v00x.h:
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\User/ch32v00x_conf.h:
 
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_adc.h:
+
+C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h:
 
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x_dbgmcu.h:
 
@@ -79,6 +82,8 @@ C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V003A4M6\Peripheral\inc/ch32v00x.h:
 ../User/../../dev_V003A4M6.c:
 
 ../User/../../common.c:
+
+../User/../../dev_UART.c:
 
 ../User/../../orgel.c:
 

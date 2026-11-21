@@ -61,7 +61,7 @@ END GROUP
  *fill*         0x000000000000009e        0x2 
                 0x00000000000000a0                _einit = .
 
-.text           0x00000000000000a0     0x35d0
+.text           0x00000000000000a0     0x3654
                 0x00000000000000a0                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000000000a0     0x29cc ./User/song_idx.o
@@ -83,94 +83,98 @@ END GROUP
                 0x0000000000002a80                __mulsi3
  *(.text.*)
  .text.song_init
-                0x0000000000002a96       0x6c ./User/main.o
+                0x0000000000002a96       0x78 ./User/main.o
  .text.wait_pwm
-                0x0000000000002b02       0x18 ./User/main.o
- .text.wait_ms  0x0000000000002b1a       0x38 ./User/main.o
+                0x0000000000002b0e       0x18 ./User/main.o
+ .text.dev_pwm_start
+                0x0000000000002b26       0x46 ./User/main.o
+ .text.SONG_SEL
+                0x0000000000002b6c       0x50 ./User/main.o
+ .text.wait_ms  0x0000000000002bbc       0x38 ./User/main.o
  .text.SystemInit
-                0x0000000000002b52       0x42 ./User/main.o
-                0x0000000000002b52                SystemInit
+                0x0000000000002bf4       0x42 ./User/main.o
+                0x0000000000002bf4                SystemInit
  .text.startup.main
-                0x0000000000002b94      0x908 ./User/main.o
-                0x0000000000002b94                main
+                0x0000000000002c36      0x8ea ./User/main.o
+                0x0000000000002c36                main
  .text.TIM1_UP_IRQHandler
-                0x000000000000349c       0x60 ./User/main.o
-                0x000000000000349c                TIM1_UP_IRQHandler
+                0x0000000000003520       0x60 ./User/main.o
+                0x0000000000003520                TIM1_UP_IRQHandler
  .text.vector_handler
-                0x00000000000034fc       0x36 ./Startup/startup_ch32v00x.o
-                0x00000000000034fc                NMI_Handler
-                0x00000000000034fe                HardFault_Handler
-                0x0000000000003500                SysTick_Handler
-                0x0000000000003502                SW_Handler
-                0x0000000000003504                WWDG_IRQHandler
-                0x0000000000003506                PVD_IRQHandler
-                0x0000000000003508                FLASH_IRQHandler
-                0x000000000000350a                RCC_IRQHandler
-                0x000000000000350c                EXTI7_0_IRQHandler
-                0x000000000000350e                AWU_IRQHandler
-                0x0000000000003510                DMA1_Channel1_IRQHandler
-                0x0000000000003512                DMA1_Channel2_IRQHandler
-                0x0000000000003514                DMA1_Channel3_IRQHandler
-                0x0000000000003516                DMA1_Channel4_IRQHandler
-                0x0000000000003518                DMA1_Channel5_IRQHandler
-                0x000000000000351a                DMA1_Channel6_IRQHandler
-                0x000000000000351c                DMA1_Channel7_IRQHandler
-                0x000000000000351e                ADC1_IRQHandler
-                0x0000000000003520                I2C1_EV_IRQHandler
-                0x0000000000003522                I2C1_ER_IRQHandler
-                0x0000000000003524                USART1_IRQHandler
-                0x0000000000003526                SPI1_IRQHandler
-                0x0000000000003528                TIM1_BRK_IRQHandler
-                0x000000000000352c                TIM1_TRG_COM_IRQHandler
-                0x000000000000352e                TIM1_CC_IRQHandler
-                0x0000000000003530                TIM2_IRQHandler
+                0x0000000000003580       0x36 ./Startup/startup_ch32v00x.o
+                0x0000000000003580                NMI_Handler
+                0x0000000000003582                HardFault_Handler
+                0x0000000000003584                SysTick_Handler
+                0x0000000000003586                SW_Handler
+                0x0000000000003588                WWDG_IRQHandler
+                0x000000000000358a                PVD_IRQHandler
+                0x000000000000358c                FLASH_IRQHandler
+                0x000000000000358e                RCC_IRQHandler
+                0x0000000000003590                EXTI7_0_IRQHandler
+                0x0000000000003592                AWU_IRQHandler
+                0x0000000000003594                DMA1_Channel1_IRQHandler
+                0x0000000000003596                DMA1_Channel2_IRQHandler
+                0x0000000000003598                DMA1_Channel3_IRQHandler
+                0x000000000000359a                DMA1_Channel4_IRQHandler
+                0x000000000000359c                DMA1_Channel5_IRQHandler
+                0x000000000000359e                DMA1_Channel6_IRQHandler
+                0x00000000000035a0                DMA1_Channel7_IRQHandler
+                0x00000000000035a2                ADC1_IRQHandler
+                0x00000000000035a4                I2C1_EV_IRQHandler
+                0x00000000000035a6                I2C1_ER_IRQHandler
+                0x00000000000035a8                USART1_IRQHandler
+                0x00000000000035aa                SPI1_IRQHandler
+                0x00000000000035ac                TIM1_BRK_IRQHandler
+                0x00000000000035b0                TIM1_TRG_COM_IRQHandler
+                0x00000000000035b2                TIM1_CC_IRQHandler
+                0x00000000000035b4                TIM2_IRQHandler
  .text.handle_reset
-                0x0000000000003532       0x84 ./Startup/startup_ch32v00x.o
-                0x0000000000003532                handle_reset
+                0x00000000000035b6       0x84 ./Startup/startup_ch32v00x.o
+                0x00000000000035b6                handle_reset
  *(.rodata)
  *(.rodata*)
- *fill*         0x00000000000035b6        0x2 
+ *fill*         0x000000000000363a        0x2 
  .rodata.onka_tbl
-                0x00000000000035b8       0x15 ./User/main.o
- *fill*         0x00000000000035cd        0x3 
+                0x000000000000363c       0x15 ./User/main.o
+ *fill*         0x0000000000003651        0x3 
  .rodata.onkou_mei_tbl
-                0x00000000000035d0       0x40 ./User/main.o
+                0x0000000000003654       0x40 ./User/main.o
  .rodata.onkou_tbl
-                0x0000000000003610       0x18 ./User/main.o
+                0x0000000000003694       0x18 ./User/main.o
  .rodata.port_tbl
-                0x0000000000003628       0x15 ./User/main.o
- *fill*         0x000000000000363d        0x3 
+                0x00000000000036ac       0x15 ./User/main.o
+ *fill*         0x00000000000036c1        0x3 
  .rodata.sw_cnf
-                0x0000000000003640       0x28 ./User/main.o
+                0x00000000000036c4       0x28 ./User/main.o
  .rodata.sw_cnt
-                0x0000000000003668        0x5 ./User/main.o
+                0x00000000000036ec        0x5 ./User/main.o
  *(.gnu.linkonce.t.*)
-                0x0000000000003670                . = ALIGN (0x4)
- *fill*         0x000000000000366d        0x3 
+                0x00000000000036f4                . = ALIGN (0x4)
+ *fill*         0x00000000000036f1        0x3 
 
-.rela.dyn       0x0000000000003670        0x0
- .rela.init     0x0000000000003670        0x0 ./User/main.o
+.rela.dyn       0x00000000000036f4        0x0
+ .rela.init     0x00000000000036f4        0x0 ./User/main.o
  .rela.text.handle_reset
-                0x0000000000003670        0x0 ./User/main.o
+                0x00000000000036f4        0x0 ./User/main.o
 
-.fini           0x0000000000003670        0x0
+.fini           0x00000000000036f4        0x0
  *(SORT_NONE(.fini))
-                0x0000000000003670                . = ALIGN (0x4)
+                0x00000000000036f4                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (_eitcm = .)
 
-.preinit_array  0x0000000000003670        0x0
+.preinit_array  0x00000000000036f4        0x0
                 [!provide]                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0000000000003670        0x0
+.init_array     0x00000000000036f4        0x0
                 [!provide]                        PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
                 [!provide]                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x0000000000003670        0x0
+.fini_array     0x00000000000036f4        0x0
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
@@ -190,15 +194,15 @@ END GROUP
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
 
-.dalign         0x0000000020000000        0x0 load address 0x0000000000003670
+.dalign         0x0000000020000000        0x0 load address 0x00000000000036f4
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_data_vma = .)
 
-.dlalign        0x0000000000003670        0x0
-                0x0000000000003670                . = ALIGN (0x4)
-                0x0000000000003670                PROVIDE (_data_lma = .)
+.dlalign        0x00000000000036f4        0x0
+                0x00000000000036f4                . = ALIGN (0x4)
+                0x00000000000036f4                PROVIDE (_data_lma = .)
 
-.data           0x0000000020000000        0x0 load address 0x0000000000003670
+.data           0x0000000020000000        0x0 load address 0x00000000000036f4
                 0x0000000020000000                . = ALIGN (0x4)
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
@@ -217,7 +221,7 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_edata = .)
 
-.bss            0x0000000020000000      0x190 load address 0x0000000000003670
+.bss            0x0000000020000000      0x190 load address 0x00000000000036f4
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_sbss = .)
  *(.sbss*)
@@ -253,47 +257,47 @@ END GROUP
                 0x0000000020000800                PROVIDE (_eusrstack = .)
 OUTPUT(orgel_SW_V003A4M6.elf elf32-littleriscv)
 
-.debug_info     0x0000000000000000     0x1f15
- .debug_info    0x0000000000000000     0x1ecd ./User/main.o
- .debug_info    0x0000000000001ecd       0x26 ./User/song_idx.o
- .debug_info    0x0000000000001ef3       0x22 ./Startup/startup_ch32v00x.o
+.debug_info     0x0000000000000000     0x1fed
+ .debug_info    0x0000000000000000     0x1fa5 ./User/main.o
+ .debug_info    0x0000000000001fa5       0x26 ./User/song_idx.o
+ .debug_info    0x0000000000001fcb       0x22 ./Startup/startup_ch32v00x.o
 
-.debug_abbrev   0x0000000000000000      0x514
- .debug_abbrev  0x0000000000000000      0x4ee ./User/main.o
- .debug_abbrev  0x00000000000004ee       0x14 ./User/song_idx.o
- .debug_abbrev  0x0000000000000502       0x12 ./Startup/startup_ch32v00x.o
+.debug_abbrev   0x0000000000000000      0x4fa
+ .debug_abbrev  0x0000000000000000      0x4d4 ./User/main.o
+ .debug_abbrev  0x00000000000004d4       0x14 ./User/song_idx.o
+ .debug_abbrev  0x00000000000004e8       0x12 ./Startup/startup_ch32v00x.o
 
-.debug_loc      0x0000000000000000      0x628
- .debug_loc     0x0000000000000000      0x628 ./User/main.o
+.debug_loc      0x0000000000000000      0x670
+ .debug_loc     0x0000000000000000      0x670 ./User/main.o
 
-.debug_aranges  0x0000000000000000       0x98
+.debug_aranges  0x0000000000000000       0xa8
  .debug_aranges
-                0x0000000000000000       0x48 ./User/main.o
+                0x0000000000000000       0x58 ./User/main.o
  .debug_aranges
-                0x0000000000000048       0x20 ./User/song_idx.o
+                0x0000000000000058       0x20 ./User/song_idx.o
  .debug_aranges
-                0x0000000000000068       0x30 ./Startup/startup_ch32v00x.o
+                0x0000000000000078       0x30 ./Startup/startup_ch32v00x.o
 
-.debug_ranges   0x0000000000000000      0x1c0
- .debug_ranges  0x0000000000000000      0x198 ./User/main.o
- .debug_ranges  0x0000000000000198       0x28 ./Startup/startup_ch32v00x.o
+.debug_ranges   0x0000000000000000      0x198
+ .debug_ranges  0x0000000000000000      0x170 ./User/main.o
+ .debug_ranges  0x0000000000000170       0x28 ./Startup/startup_ch32v00x.o
 
-.debug_line     0x0000000000000000     0x1ff6
- .debug_line    0x0000000000000000     0x1e04 ./User/main.o
- .debug_line    0x0000000000001e04       0x44 ./User/song_idx.o
- .debug_line    0x0000000000001e48      0x1ae ./Startup/startup_ch32v00x.o
+.debug_line     0x0000000000000000     0x20d5
+ .debug_line    0x0000000000000000     0x1ee3 ./User/main.o
+ .debug_line    0x0000000000001ee3       0x44 ./User/song_idx.o
+ .debug_line    0x0000000000001f27      0x1ae ./Startup/startup_ch32v00x.o
 
-.debug_str      0x0000000000000000      0xcd2
- .debug_str     0x0000000000000000      0xc95 ./User/main.o
-                                        0xd73 (size before relaxing)
- .debug_str     0x0000000000000c95       0x1f ./User/song_idx.o
+.debug_str      0x0000000000000000      0xcf0
+ .debug_str     0x0000000000000000      0xcb3 ./User/main.o
+                                        0xd97 (size before relaxing)
+ .debug_str     0x0000000000000cb3       0x1f ./User/song_idx.o
                                          0x52 (size before relaxing)
- .debug_str     0x0000000000000cb4       0x1e ./Startup/startup_ch32v00x.o
+ .debug_str     0x0000000000000cd2       0x1e ./Startup/startup_ch32v00x.o
                                          0x5d (size before relaxing)
 
 .comment        0x0000000000000000       0x33
  .comment       0x0000000000000000       0x33 ./User/main.o
                                          0x34 (size before relaxing)
 
-.debug_frame    0x0000000000000000       0x7c
- .debug_frame   0x0000000000000000       0x7c ./User/main.o
+.debug_frame    0x0000000000000000       0xb4
+ .debug_frame   0x0000000000000000       0xb4 ./User/main.o
