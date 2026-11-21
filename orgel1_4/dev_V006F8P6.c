@@ -41,18 +41,26 @@ void SystemInit(void)
 //==============================================
 #include "common.c"				//共通ｺｰﾄﾞを呼込む
 
+#ifdef	ISP_SPIFLASH_EN			//ISP環境でSPIﾌﾗｯｼｭを書替えるとき
+#include "dev_UART.c"				//UARTを呼込む
+#undef	VOICE_S					//SPI音声を
+#define	VOICE_S	1				//　使用する設定にする
+#include "dev_SPI.c"				//SPIを呼込む
+
+#else					//電子ｵﾙｺﾞｰﾙを実行するとき
+#if defined(UART_TX)||defined(UART_RX)	//UARTを実装するとき
+#include "dev_UART.c"				//UARTを呼込む
+#endif
 #if VOICE_I>0				//音声Iを使うとき
 #include "dev_I2C.c"				//I2Cを呼込む
 #endif
-
 #if VOICE_C+VOICE_S>0			//音声Cか音声Sを使うとき
 #include "dev_SPI.c"				//SPIを呼込む
 #endif
-
 #define	MounRiverStudio
 #include "orgel.c"				//orgelｴﾝｼﾞﾝを呼込む
-
 #include "dev_PWM.c"				//PWMを呼込む
+#endif
 
 
 //==============================================
@@ -112,21 +120,22 @@ static void CB_INIT(void)
 //DBG_C('\n');
 //DBG_C('!');
 
-	//I2Cﾎﾟｰﾄ設定
-#if VOICE_I>0
+	//周辺機能設定
+#ifdef	ISP_SPIFLASH_EN			//ISP環境でSPIﾌﾗｯｼｭを書替えるとき
+	uart_init();				//UART初期設定
+	spi_init();				//SPI初期設定
+
+#else					//電子ｵﾙｺﾞｰﾙを実行するとき
+#if defined(UART_TX)||defined(UART_RX)	//UARTを使うとき
+	uart_init();				//UART初期設定
+#endif
+#if VOICE_I>0				//I2Cを使うとき
 	i2c_init();				//I2C初期設定
 #endif
-//DBG_C('a');
-
-	//SPIﾎﾟｰﾄ設定
-#if VOICE_C+VOICE_S>0
+#if VOICE_C+VOICE_S>0			//SPIを使うとき
 	spi_init();				//SPI初期設定
 #endif
-//DBG_C('b');
-
-	//PWM設定
 	pwm_init();				//PWM初期設定
-//DBG_C('c');
 
 	//ADCの実装要否
 #if defined(CdS_EN)||defined(CVD_EN)	//CdSかCVDを実装するとき
@@ -143,6 +152,7 @@ static void CB_INIT(void)
 	while(!(ADC1->CTLR2&ADC_ADON));		//ADC有効を待つ
 	ADC1->SAMPTR2=0x00000000;		//CH0のｻﾝﾌﾟﾙﾀｲﾑは3ｻｲｸﾙ
 //DBG_C('d');
+#endif
 #endif
 
 	//ｱﾌﾟﾘの初期設定(LED設定はｱﾌﾟﾘの初期化で実施)

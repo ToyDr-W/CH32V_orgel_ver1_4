@@ -1,6 +1,7 @@
 #ifndef def_enve_VIB
 #define def_enve_VIB
 
+	.globl	enve_VIB
 enve_VIB:
 	.byte	enve_VIB_end-enve_VIB-2
 	.byte	255

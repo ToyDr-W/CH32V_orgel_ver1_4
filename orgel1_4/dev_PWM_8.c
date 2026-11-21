@@ -31,7 +31,7 @@ void TIM1_UP_IRQHandler(void)
 		TIM1->CH2CVR=(long)pcm*PWM_STEP/32768;
 						//正相を設定する
 	}
-	else if(pcm<0)				/負値のとき
+	else if(pcm<0)				//負値のとき
 	{
 		TIM1->CH2CVR=0;			//正相を止める
 		TIM1->CH4CVR=(long)(-pcm)*PWM_STEP/32768;
@@ -96,11 +96,12 @@ static void dev_pwm_stop(void)
 	TIM1->CH2CVR=TIM1->CH4CVR=0;		//DCを0%にする
 	wait_pwm();				//PWM周期を待つ
 #if BTL==3				//ﾌﾞﾚｰｷ出力のとき
-	TIM1->CCER=0x1100;			//CC3を非反転出力､CC4を非反転出力
+	TIM1->CCER=0x1040;			//CC2Nを非反転出力､CC4を非反転出力
 #endif
 #endif
 //DBG_C('6');
 }
+#endif
 
 
 //==============================================
@@ -121,11 +122,11 @@ static void dev_pwm_start(void)
 #endif
 #if BTL==1				//ｺﾝﾌﾟﾘ出力のとき
 //DBG_C('2');
-	TIM1->CCER=0x0005;			//CC1を非反転出力､CC1Nを非反転出力
+	TIM1->CCER=0x0050;			//CC2･CC2Nを非反転出力
 #endif
 #if BTL==3				//ﾌﾞﾚｰｷ出力のとき
 //DBG_C('3');
-	TIM1->CCER=0x3300;			//CC3を反転出力､CC4を反転出力
+	TIM1->CCER=0x30c0;			//CC2Nを反転出力､CC4を反転出力
 #endif
 
 	//PWMを再開
@@ -133,7 +134,6 @@ static void dev_pwm_start(void)
 	TIM1->DMAINTENR=TIM_IT_Update;		//更新ｲﾍﾞﾝﾄ割込み許可
 //DBG_C('5');
 }
-#endif
 
 
 //==============================================
@@ -143,6 +143,11 @@ static void pwm_init(void)
 {
 
 //DBG_C('p');
+
+	//交代ﾋﾟﾝ設定
+#ifdef PCFR1_PWM			//PWMの交代ﾋﾟﾝが宣言されていたら
+	AFIO->PCFR1|=PCFR1_PWM;			//交代ﾋﾟﾝを設定する
+#endif
 
 	//PWM設定(正相:PA2[T1CH2N]､ｺﾝﾌﾟﾘ逆相:PA1[T1CH2]､ﾌﾞﾘｯｼﾞ逆相:PC4[T1CH4])
 #if BTL==2				//ﾌﾞﾘｯｼﾞ出力のとき
@@ -164,7 +169,6 @@ static void pwm_init(void)
 	TIM1->CCER=0x0040;			//CC2Nを非反転出力
 #endif
 #if BTL==1				//ｺﾝﾌﾟﾘ出力のとき
-	TIM1->CCER=0x00f0;			//CC2･CC2Nを反転出力
 	TIM1->BDTR|=PWM_DB_CMP;			//ﾃﾞｯﾄﾞﾊﾞﾝﾄﾞを設定する
 	GPIO_AF(PWM_C_GPIO,PWM_C_BIT);		//相補を交代機能に設定
 #endif
@@ -173,17 +177,11 @@ static void pwm_init(void)
 	GPIO_AF(PWM_R_GPIO,PWM_R_BIT);		//逆相を交代機能に設定
 #endif
 #if BTL==3				//ﾌﾞﾚｰｷ出力のとき
-	TIM1->CCER=0x30c0;			//CC2Nを反転出力､CC4を反転出力
 	GPIO_AF(PWM_R_GPIO,PWM_R_BIT);		//逆相を交代機能に設定
-#endif
-#if BTL==0				//ｼﾝｸﾞﾙ出力のとき
-	while(TIM1->CH2CVR++<PWM_STEP/2)	//DCが50%になるまでｲﾝｸﾘする
-	{
-		wait_pwm();			//PWM周期を待つ
-	}
 #endif
 
 	//PWM割込み設定
 	NVIC_EnableIRQ(TIM1_UP_IRQn);		//TIM1更新ｲﾍﾞﾝﾄ割込み許可(Coreﾏｸﾛ)
-	TIM1->DMAINTENR=TIM_IT_Update;		//更新ｲﾍﾞﾝﾄ割込み許可
+//DBG_C('c');
+	dev_pwm_start();			//PWMを開始する
 }

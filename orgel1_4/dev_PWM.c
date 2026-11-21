@@ -31,7 +31,7 @@ void TIM1_UP_IRQHandler(void)
 		TIM1->CH3CVR=(long)pcm*PWM_STEP/32768;
 						//正相を設定する
 	}
-	else if(pcm<0)				/負値のとき
+	else if(pcm<0)				//負値のとき
 	{
 		TIM1->CH3CVR=0;			//正相を止める
 		TIM1->CH4CVR=(long)(-pcm)*PWM_STEP/32768;
@@ -101,6 +101,7 @@ static void dev_pwm_stop(void)
 #endif
 //DBG_C('6');
 }
+#endif
 
 
 //==============================================
@@ -133,7 +134,6 @@ static void dev_pwm_start(void)
 	TIM1->DMAINTENR=TIM_IT_Update;		//更新ｲﾍﾞﾝﾄ割込み許可
 //DBG_C('5');
 }
-#endif
 
 
 //==============================================
@@ -143,6 +143,11 @@ static void pwm_init(void)
 {
 
 //DBG_C('p');
+
+	//交代ﾋﾟﾝ設定
+#ifdef PCFR1_SPI			//SPIの交代ﾋﾟﾝが宣言されていたら
+	AFIO->PCFR1|=PCFR1_SPI;			//交代ﾋﾟﾝを設定する
+#endif
 
 	//PWM設定(TIM1)
 #if BTL==2				//ﾌﾞﾘｯｼﾞ出力のとき
@@ -164,7 +169,6 @@ static void pwm_init(void)
 	TIM1->CCER=0x0100;			//CC3を非反転出力
 #endif
 #if BTL==1				//ｺﾝﾌﾟﾘ出力のとき
-	TIM1->CCER=0x0005;			//CC1を非反転出力､CC1Nを非反転出力
 	TIM1->BDTR|=PWM_DB_CMP;			//ﾃﾞｯﾄﾞﾊﾞﾝﾄﾞを設定する
 	GPIO_AF(PWM_C_GPIO,PWM_C_BIT);		//相補を交代機能に設定
 #endif
@@ -173,20 +177,13 @@ static void pwm_init(void)
 	GPIO_AF(PWM_R_GPIO,PWM_R_BIT);		//逆相を交代機能に設定
 #endif
 #if BTL==3				//ﾌﾞﾚｰｷ出力のとき
-	TIM1->CCER=0x3300;			//CC3を反転出力､CC4を反転出力
 	GPIO_AF(PWM_R_GPIO,PWM_R_BIT);		//逆相を交代機能に設定
 #endif
 //DBG_C('a');
-#if BTL==0				//ｼﾝｸﾞﾙ出力のとき
-	while(TIM1->CH3CVR++<PWM_STEP/2)	//DCが50%になるまでｲﾝｸﾘする
-	{
-		wait_pwm();			//PWM周期を待つ
-	}
-#endif
 //DBG_C('b');
 
 	//PWM割込み設定
 	NVIC_EnableIRQ(TIM1_UP_IRQn);		//TIM1更新ｲﾍﾞﾝﾄ割込み許可(Coreﾏｸﾛ)
-	TIM1->DMAINTENR=TIM_IT_Update;		//更新ｲﾍﾞﾝﾄ割込み許可
 //DBG_C('c');
+	dev_pwm_start();			//PWMを開始する
 }

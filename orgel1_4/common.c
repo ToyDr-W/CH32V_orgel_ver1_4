@@ -29,7 +29,7 @@ static void wait_1us(void)
 	SysTick->CTLR=4;			//ｶｳﾝﾄ停止
 	SysTick->CNT=0;				//ｶｳﾝﾀをｸﾘｱ
 	SysTick->SR&=~1;			//ﾌﾗｸﾞをｸﾘｱしておく
-	SysTick->CMP=SYS_CLK-SYS_CLK;		//比較値を設定
+	SysTick->CMP=0;				//比較値を設定
 	SysTick->CTLR=5;			//ﾀｲﾑﾍﾞｰｽはHCLK､ｶｳﾝﾄ開始
 	while(!(SysTick->SR&1));		//ﾌﾗｸﾞｾｯﾄを待つ
 }
@@ -43,14 +43,13 @@ static void wait_us(
 	unsigned short us)			//待ち時間[us]
 {
 
-	if(us>17) us-=17;
-	else us=1;
+	if(us) us--;				//処理のｵｰﾊﾞﾍｯﾄﾞを調整
 	SysTick->CTLR=4;			//ｶｳﾝﾄ停止
 	SysTick->CNT=0;				//ｶｳﾝﾀをｸﾘｱ
 	SysTick->SR&=~1;			//ﾌﾗｸﾞをｸﾘｱしておく
-	SysTick->CMP=us*SYS_CLK-SYS_CLK;	//比較値を設定
+	SysTick->CMP=us*SYS_CLK;		//比較値を設定
 	SysTick->CTLR=5;			//ﾀｲﾑﾍﾞｰｽはHCLK､ｶｳﾝﾄ開始
-	while(!(SysTick->SR&1));		//ﾌﾗｸﾞｾｯﾄを待つ
+	while(!(SysTick->SR&1)){};		//ﾌﾗｸﾞｾｯﾄを待つ
 }
 
 
@@ -122,6 +121,12 @@ static void outpt_c(				//戻り値無し
 static void dbg_init(void)
 {
 
+	//交代ﾋﾟﾝ設定
+#ifdef PCFR1_DBG			//DBGの交代ﾋﾟﾝが宣言されていたら
+	AFIO->PCFR1|=PCFR1_DBG;			//交代ﾋﾟﾝを設定する
+#endif
+
+	//USART設定
 	USART1->CTLR2=0x00002000;		//ｽﾄｯﾌﾟ2
 	USART1->BRR=(SYS_CLK*10000000/SHBPS+5)/10-1;
 						//ﾎﾞｰﾚｰﾄ設定
@@ -278,7 +283,7 @@ static void outpt_i(
 
 
 //==============================================
-//ﾃﾞﾊﾞｸﾞ情報出力のﾏｸﾛ定義
+//ﾃﾞﾊﾞｸﾞ情報入出力のﾏｸﾛ定義
 //==============================================
 #define DBG_IN() input_c()
 #define DBG_C(c) outpt_c((unsigned char)c)

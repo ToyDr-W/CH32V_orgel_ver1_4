@@ -165,29 +165,38 @@ static void i2c_begin(
 static void i2c_init(void)
 {
 
+	//ｽﾚｰﾌﾞの同期
 	GPIO_H(I2C_SCL_GPIO,I2C_SCL_BIT);	//SCLをH
 	GPIO_OUTOD(I2C_SCL_GPIO,I2C_SCL_BIT);	//SCLをOD出力
 	GPIO_H(I2C_SDA_GPIO,I2C_SDA_BIT);	//SDAをH
 	GPIO_OUTOD(I2C_SDA_GPIO,I2C_SDA_BIT);	//SDAをOD出力
+
 	for(;;)					//I2Cｽﾚｰﾌﾞを同期する
 	{
-		wait_us(1);
+		wait_us(10);
 		if(GPIO_R(I2C_SDA_GPIO,I2C_SDA_BIT)) break;
 						//SDAがHになったら抜ける
 		GPIO_H(I2C_SCL_GPIO,I2C_SCL_BIT);
 						//SCLをH
-		wait_us(1);
+		wait_us(10);
 		GPIO_L(I2C_SCL_GPIO,I2C_SCL_BIT);
 						//SCLをL
 	}
-	wait_us(1);
+	wait_us(10);
 	GPIO_L(I2C_SDA_GPIO,I2C_SDA_BIT);	//SDAをL
-	wait_us(1);
+	wait_us(10);
 	GPIO_H(I2C_SCL_GPIO,I2C_SCL_BIT);	//SCLをH
-	wait_us(1);
+	wait_us(10);
 	GPIO_H(I2C_SDA_GPIO,I2C_SDA_BIT);	//SDAをH
-	wait_us(1);
+	wait_us(10);
+
 #ifndef I2C_SOFT			//内蔵I2Cﾓｼﾞｭｰﾙを使うとき
+	//交代ﾋﾟﾝ設定
+#ifdef PCFR1_I2C			//I2Cの交代ﾋﾟﾝが宣言されていたら
+	AFIO->PCFR1|=PCFR1_I2C;			//交代ﾋﾟﾝを設定する
+#endif
+
+	//I2C設定
 	GPIO_AFOD(I2C_SCL_GPIO,I2C_SCL_BIT);	//SCLを交代機能に設定
 	GPIO_AFOD(I2C_SDA_GPIO,I2C_SDA_BIT);	//SDAを交代機能に設定
 	I2C1->CTLR1=0x0401;			//ACK有効､I2C有効

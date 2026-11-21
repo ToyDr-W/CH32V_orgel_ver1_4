@@ -24,9 +24,9 @@
 //KB音量ﾃｰﾌﾞﾙ
 //==============================================
 #if KB_N>0
-static const unsigned short kb_vol[]={
-	KB0_VOL*256/100,
-	KB1_VOL*256/100
+static const unsigned char kb_vol[]={
+	KB0_VOL*255/100,
+	KB1_VOL*255/100,
 };
 #endif
 
@@ -35,10 +35,10 @@ static const unsigned short kb_vol[]={
 //音声N音量ﾃｰﾌﾞﾙ
 //==============================================
 #if VOICE_N>0
-static const unsigned short voiceN_vol[]={
-	VOICEN0_VOL*256/100,
-	VOICEN1_VOL*256/100,
-	VOICEN2_VOL*256/100,
+static const unsigned char voiceN_vol[]={
+	VOICEN0_VOL*255/100,
+	VOICEN1_VOL*255/100,
+	VOICEN2_VOL*255/100,
 };
 #endif
 
@@ -47,10 +47,10 @@ static const unsigned short voiceN_vol[]={
 //音声S音量ﾃｰﾌﾞﾙ
 //==============================================
 #if VOICE_S>0
-static const unsigned short voiceS_vol[]={
-	VOICES0_VOL*256/100,
-	VOICES1_VOL*256/100,
-	VOICES2_VOL*256/100,
+static const unsigned char voiceS_vol[]={
+	VOICES0_VOL*255/100,
+	VOICES1_VOL*255/100,
+	VOICES2_VOL*255/100,
 };
 #endif
 
@@ -285,10 +285,16 @@ static void song_init(void)
 				((unsigned long)part_pt->song_part->enve+SONG_IDX_BASE);
 						//ｴﾝﾍﾞﾛｰﾌﾟ波形へのﾎﾟｲﾝﾀを取得する
 //DBG_L(part_pt->enve);
+			part_pt->enve_psn=part_pt->song_part->enve_psn;
+						//ｴﾝﾍﾞﾛｰﾌﾟ処理ﾌﾟﾘｽｹｰﾙ値を取得する
+//DBG_L(part_pt->enve_psn);
 			part_pt->pitch=(struct PITCH_HDR *)
 				((unsigned long)part_pt->song_part->pitch+SONG_IDX_BASE);
 						//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形へのﾎﾟｲﾝﾀを取得する
 //DBG_L(part_pt->pitch);
+			part_pt->pitch_psn=part_pt->song_part->pitch_psn;
+						//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形へのﾎﾟｲﾝﾀを取得する
+//DBG_L(part_pt->pitch_psn);
 //DBG_D(&part[m],sizeof(part[m]));
 		}
 		else part_pt->song_part=0;	//未実装ﾊﾟｰﾄは演奏終了にしておく
@@ -343,11 +349,15 @@ static void SONG_SEL(
 //KB演奏開始処理(API関数)
 //==============================================
 static void KB_START(
-	unsigned char kb,			//KB演奏を開始するﾊﾟｰﾄ番号(0起算)
+	unsigned char kb,			//KB演奏ﾊﾟｰﾄ番号(0起算)
 						//制御表はpart[PART_N+kb]にｱｸｾｽする
-	const struct WAVE_HDR *wave,		//音源波形ﾃｰﾌﾞﾙﾍｯﾀﾞ
-	const struct ENVE_HDR *enve,		//ｴﾝﾍﾞﾛｰﾌﾟ波形ﾃｰﾌﾞﾙﾍｯﾀﾞ
-	const struct PITCH_HDR *pitch)		//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形ﾃｰﾌﾞﾙﾍｯﾀﾞ
+	const unsigned short kb_psn,		//音価ﾌﾟﾘｽｹｰﾙ値
+	const struct WAVE_HDR *wave,		//音源波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽ
+	const struct ENVE_HDR *enve,		//ｴﾝﾍﾞﾛｰﾌﾟ波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽ
+	const unsigned short enve_psn,		//ｴﾝﾍﾞﾛｰﾌﾟ処理ﾌﾟﾘｽｹｰﾙ値
+	const struct PITCH_HDR *pitch,		//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽ
+	const unsigned short pitch_psn,		//ﾋﾟｯﾁﾍﾞﾝﾄﾞ処理ﾌﾟﾘｽｹｰﾙ値
+	const unsigned char velo)		//音量(0～255)
 {
 	unsigned short n;
 	unsigned char *p;
@@ -362,17 +372,21 @@ static void KB_START(
 //DBG_C('t');
 	for(n=0,p=(unsigned char *)&part[PART_N+kb];n<sizeof(part[0]);n++,p++) *p=0;
 						//先ずｸﾘｱしておく
-	song.onka_kb_psn=KB_PSN;		//KB演奏用音価ﾌﾟﾘｽｹｰﾙ値を設定する
+	song.onka_kb_psn=kb_psn;		//KB演奏用音価ﾌﾟﾘｽｹｰﾙ値を設定する
 //DBG_S(song.onka_kb_psn);
-	part[PART_N+kb].ongen=wave;		//音源ﾃﾞｰﾀｱﾄﾞﾚｽを設定する
+	part[PART_N+kb].ongen=wave;		//音源波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽを設定する
 //DBG_L(part[PART_N+kb].ongen);
-	part[PART_N+kb].enve=enve;		//ｴﾝﾍﾞﾛｰﾌﾟﾃﾞｰﾀｱﾄﾞﾚｽを設定する
+	part[PART_N+kb].enve=enve;		//ｴﾝﾍﾞﾛｰﾌﾟ波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽを設定する
 //DBG_L(part[PART_N+kb].enve);
-	part[PART_N+kb].pitch=pitch;		//ﾋﾟｯﾁﾍﾞﾝﾄﾞﾃﾞｰﾀｱﾄﾞﾚｽを設定する
+	part[PART_N+kb].enve_psn=enve_psn;	//ｴﾝﾍﾞﾛｰﾌﾟ処理実行のﾌﾟﾘｽｹｰﾙ値を設定する
+//DBG_S(part[PART_N+kb].enve_psn);
+	part[PART_N+kb].pitch=pitch;		//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽを設定する
 //DBG_L(part[PART_N+kb].pitch);
-	part[PART_N+kb].velo=kb_vol[kb];	//音量を設定する
-	part[PART_N+kb].enve_psn=KB_EPSENV;	//ｴﾝﾍﾞﾛｰﾌﾟ処理実行のﾌﾟﾘｽｹｰﾙ値を設定する
-	part[PART_N+kb].pitch_psn=KB_PPSPIT;	//ﾋﾟｯﾁﾍﾞﾝﾄﾞ処理実行のﾌﾟﾘｽｹｰﾙ値を設定する
+	part[PART_N+kb].pitch_psn=pitch_psn;	//ﾋﾟｯﾁﾍﾞﾝﾄﾞ処理実行のﾌﾟﾘｽｹｰﾙ値を設定する
+//DBG_S(part[PART_N+kb].pitch_psn);
+	part[PART_N+kb].velo=(unsigned short)velo*(kb_vol[kb]+1)/256;
+						//音量を設定する
+//DBG_B(part[PART_N+kb].velo);
 	part[PART_N+kb].song_part=(const struct SONG_PART *)0xffff;
 						//演奏中を設定する
 //DBG_C('>');
@@ -1559,8 +1573,7 @@ static void VOICES_SEL(				//戻り値無し
 #endif
 #if VOICE_S==1				//単一ch実装のとき
 		spi_addr=0;			//SPIｱﾄﾞﾚｽ設定未にする
-		GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);	//SSをﾈｹﾞｰﾄする
-		SPI_SS_WAIT();			//SSﾈｹﾞｰﾄ時間を待つ
+		spi_dis();			//ﾃﾞｨｾﾚｸﾄ
 #endif
 	}
 	else					//再生中断のとき
@@ -1568,8 +1581,7 @@ static void VOICES_SEL(				//戻り値無し
 		voiceS_pt->no=0;		//再生終了にする
 		voiceS_pt->pcm=0;		//PCM値をｸﾘｱしておく
 #if VOICE_S<2				//単一ch実装のとき
-		GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);	//SSをﾈｹﾞｰﾄする
-		SPI_SS_WAIT();			//SSﾈｹﾞｰﾄ時間を待つ
+		spi_dis();			//ﾃﾞｨｾﾚｸﾄ
 #endif
 	}
 //DBG_D(&voiceS,sizeof(voiceS));
@@ -1611,7 +1623,7 @@ static unsigned char voiceS_get(		//ｻﾝﾌﾟﾙを返す
 	{
 		GPIO_L(SPI_SCK_GPIO,SPI_SCK_BIT);
 						//SCKをL
-		GPIO_L(SPI_SS_GPIO,SPI_SS_BIT);	//ﾁｯﾌﾟｾﾚｸﾄ
+		spi_sel();			//ｾﾚｸﾄ
 		spi_send(W25_ReadData,0);	//ReadDataｺﾏﾝﾄﾞ
 		spi_send(voiceS_pt->begin>>16,0);
 						//ｱﾄﾞﾚｽ(MSB)
@@ -1639,8 +1651,7 @@ static unsigned char voiceS_get(		//ｻﾝﾌﾟﾙを返す
 #endif
 //DBG_B(data);
 #if VOICE_S>1				//複数ch実装のとき
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//ﾁｯﾌﾟﾃﾞｾﾚｸﾄ
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
+		spi_dis();			//ﾃﾞｨｾﾚｸﾄ
 #endif
 	return(data);
 }
@@ -1748,12 +1759,6 @@ int main(void)
 
 	CB_INIT();				//ﾃﾞﾊﾞｲｽの初期設定
 
-#if PART_N+KB_N>0				//ｵﾙｺﾞｰﾙ演奏･KB演奏を実装するとき
-	//&SONG_IDXをﾘﾝｸするためのおまじない
-	void song_idx_dmy(void);		//song_idxのｴﾝﾄﾘ
-	song_idx_dmy();				//ﾀﾞﾐｰｺｰﾙする
-#endif
-
 
 //==============================================
 //ﾒｲﾝﾙｰﾌﾟ
@@ -1773,7 +1778,9 @@ int main(void)
 //DBG_C('k');
 			kyotuu.ps=(unsigned long)KOYUU_PR*1000/PWM_PR-1;
 						//固有処理ﾌﾟﾘｽｹｰﾗを初期化
+//DBG_C('#');
 			CB_KOYUU();		//固有処理(ｺｰﾙﾊﾞｯｸ関数)を呼出す
+//DBG_C('$');
 		}
 
 
@@ -1806,6 +1813,7 @@ int main(void)
 //==============================================
 //音声0再生処理
 //==============================================
+//DBG_S(voiceN[0].no);
 		if(voiceN[0].no)		//再生中のとき
 		{
 			voiceN_exe(0);		//演奏処理を実行する

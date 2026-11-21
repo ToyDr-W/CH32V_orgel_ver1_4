@@ -1,6 +1,7 @@
 #ifndef def_enve_TREMOLO
 #define def_enve_TREMOLO
 
+	.globl	enve_TREMOLO
 enve_TREMOLO:
 	.byte	enve_TREMOLO_end-enve_TREMOLO-2
 	.byte	255

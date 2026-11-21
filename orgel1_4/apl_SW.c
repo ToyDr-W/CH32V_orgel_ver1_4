@@ -658,6 +658,9 @@ static void apl_init(void)
 #ifdef CdS_EN				//CdSを実装するとき
 	GPIO_IN(CdS_GPIO,CdS_BIT);		//入力ﾓｰﾄﾞ
 #endif
+
+//DBG_C('\n');
+//DBG_C('!');
 }
 
 
@@ -908,7 +911,7 @@ static void CB_KOYUU(void)
 #if VOICE_S>0				//音声S再生を実装するとき
 					//音声CはSPIを専有するのでﾘｾｯﾄ/ｾｯﾄできない
 		spi_reset();			//SPIﾎﾟｰﾄをﾘｾｯﾄする
-		wait_us(5);			//SWの電圧安定を待つ
+		wait_us(10);			//SWの電圧安定を待つ
 #endif
 //DBS_H;
 		for(n=0;n<SW_SU;n++)		//SWの実装数まで繰返す

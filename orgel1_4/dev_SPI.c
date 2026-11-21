@@ -1,13 +1,28 @@
+//==============================================
+//大域変数
+//==============================================
+#if VOICE_S==1				//単一ch実装のとき
 static unsigned char spi_addr;			//SPIｱﾄﾞﾚｽ設定(0=未､1=済)
+#endif
 
 
 //==============================================
-//SSのﾈｹﾞｰﾄ待ちのﾏｸﾛ置換え
+//SPIｾﾚｸﾄ
+//==============================================
+#define	spi_sel()	GPIO_L(SPI_SS_GPIO,SPI_SS_BIT)
+						//SSをL
+
+
+//==============================================
+//SPIﾃﾞｨｾﾚｸﾄ
 //==============================================
 #ifdef SHSPI2				//2線SPIのとき
-#define	SPI_SS_WAIT()	wait_us(SPI_SS_TIME)	//SSがﾈｹﾞｰﾄするまで待つ
-#else					//その他のとき
-#define	SPI_SS_WAIT()				//SSﾈｹﾞｰﾄ待ちをしない
+#define	spi_dis()	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT),wait_us(SPI_SS_TIME)
+						//SSをHにして､SSのﾈｹﾞｰﾄ時間を待つ
+						//直前のSCK=HによりSSはHになる
+#else					//4線SPI､3線SPIのとき
+#define	spi_dis()	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT)
+						//SSをH
 #endif
 
 
@@ -255,9 +270,17 @@ static unsigned char spi_trans(			//受信したﾃﾞｰﾀを返す
 static void spi_set(void)
 {
 
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
+	spi_dis();				//ﾃﾞｨｾﾚｸﾄ
 	GPIO_OUT(SPI_SS_GPIO,SPI_SS_BIT);	//SSを出力ﾓｰﾄﾞ
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
+#ifdef SPI_SOFT				//SPIをｿﾌﾄ実装するとき
+#ifndef SHSPI2				//2線SPIでないとき
+	GPIO_L(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKをL
+	GPIO_OUT(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKを出力ﾓｰﾄﾞ
+#endif
+#if !defined(SHSPI3)&&!defined(SHSPI2)	//4線SPIのとき
+	GPIO_L(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIをL
+	GPIO_OUT(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIを出力ﾓｰﾄﾞ
+#endif
 #ifdef SPI_MISO_PU			//MISOをﾌﾟﾙｱｯﾌﾟするとき
 	GPIO_INPU(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOをﾌﾟﾙｱｯﾌﾟ入力
 #endif
@@ -265,21 +288,13 @@ static void spi_set(void)
 	GPIO_INPD(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOをﾌﾟﾙﾀﾞｳﾝ入力
 #endif
 #if !defined(SPI_MISO_PU)&&!defined(SPI_MISO_PD)
-					//MISOのﾌﾟﾙｱｯﾌﾟ/ﾀﾞｳﾝが無指定のとき
+					//MISOのﾌﾟﾙﾀﾞｳﾝ/ﾀﾞｳﾝが無指定のとき
 	GPIO_IN(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOを入力
-#endif
-#if !defined(SPI3)&&!defined(SPI2)	//4線SPIのとき
-	GPIO_L(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIをL
-	GPIO_OUT(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIを出力ﾓｰﾄﾞ
-#endif
-#ifdef SPI_SOFT				//SPIをｿﾌﾄ実装するとき
-#ifndef SPI2				//2線SPIでないとき
-	GPIO_L(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKをL
-	GPIO_OUT(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKを出力ﾓｰﾄﾞ
 #endif
 #else					//内蔵SPIﾓｼﾞｭｰﾙを使うとき
 	GPIO_AF(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKを交代機能に設定
 	GPIO_AF(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIを交代機能に設定
+	GPIO_AF(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOを交代機能に設定
 #endif
 #if VOICE_S==1				//単一ch実装のとき
 	spi_addr=0;				//SPIｱﾄﾞﾚｽ設定未にする
@@ -295,9 +310,8 @@ static void spi_set(void)
 static void spi_reset(void)
 {
 
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
-#ifndef SPI2				//2線SPIでないとき
+	spi_dis();				//ﾃﾞｨｾﾚｸﾄ
+#ifndef SHSPI2				//2線SPIでないとき
 #ifdef SPI_SCK_PU			//SCKをﾌﾟﾙｱｯﾌﾟするとき
 	GPIO_INPU(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKをﾌﾟﾙｱｯﾌﾟ入力
 #endif
@@ -305,11 +319,9 @@ static void spi_reset(void)
 	GPIO_INPD(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKをﾌﾟﾙﾀﾞｳﾝ入力
 #endif
 #if !defined(SPI_SCK_PU)&&!defined(SPI_SCK_PD)
-					//SCKのﾌﾟﾙｱｯﾌﾟ/ﾀﾞｳﾝが無指定のとき
+					//SCKのﾌﾟﾙﾀﾞｳﾝ/ﾀﾞｳﾝが無指定のとき
 	GPIO_IN(SPI_SCK_GPIO,SPI_SCK_BIT);	//SCKを入力
 #endif
-#endif
-#if !defined(SPI3)&&!defined(SPI2)	//4線SPIのとき
 #ifdef SPI_MOSI_PU			//MOSIをﾌﾟﾙｱｯﾌﾟするとき
 	GPIO_INPU(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIをﾌﾟﾙｱｯﾌﾟ入力
 #endif
@@ -317,8 +329,20 @@ static void spi_reset(void)
 	GPIO_INPD(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIをﾌﾟﾙﾀﾞｳﾝ入力
 #endif
 #if !defined(SPI_MOSI_PU)&&!defined(SPI_MOSI_PD)
-					//MOSIのﾌﾟﾙｱｯﾌﾟ/ﾀﾞｳﾝが無指定のとき
+					//MOSIのﾌﾟﾙﾀﾞｳﾝ/ﾀﾞｳﾝが無指定のとき
 	GPIO_IN(SPI_MOSI_GPIO,SPI_MOSI_BIT);	//MOSIを入力
+#endif
+#endif
+#if !defined(SHSPI3)&&!defined(SHSPI2)	//4線SPIのとき
+#ifdef SPI_MISO_PU			//MISOをﾌﾟﾙｱｯﾌﾟするとき
+	GPIO_INPU(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOをﾌﾟﾙｱｯﾌﾟ入力
+#endif
+#ifdef SPI_MISO_PD			//MISOをﾌﾟﾙﾀﾞｳﾝするとき
+	GPIO_INPD(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOをﾌﾟﾙﾀﾞｳﾝ入力
+#endif
+#if !defined(SPI_MISO_PU)&&!defined(SPI_MISO_PD)
+					//MISOのﾌﾟﾙﾀﾞｳﾝ/ﾀﾞｳﾝが無指定のとき
+	GPIO_IN(SPI_MISO_GPIO,SPI_MISO_BIT);	//MISOを入力
 #endif
 #endif
 }
@@ -333,12 +357,9 @@ static void spi_reset(void)
 static void W25_PWR_DOWN(void)
 {
 
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
-	GPIO_L(SPI_SS_GPIO,SPI_SS_BIT);		//ﾁｯﾌﾟｾﾚｸﾄ
+	spi_sel();				//ｾﾚｸﾄ
 	spi_send(W25_PwrDwn,1);			//ﾊﾟﾜｰﾀﾞｳﾝｺﾏﾝﾄﾞ
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
+	spi_dis();				//ﾃﾞｨｾﾚｸﾄ
 	wait_us(3);				//ﾊﾟﾜｰﾀﾞｳﾝ時間を待つ
 }
 #endif
@@ -350,12 +371,9 @@ static void W25_PWR_DOWN(void)
 static void W25_PWR_UP(void)
 {
 
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
-	GPIO_L(SPI_SS_GPIO,SPI_SS_BIT);		//ﾁｯﾌﾟｾﾚｸﾄ
+	spi_sel();				//ｾﾚｸﾄ
 	spi_send(W25_Re_PwrDwn,0);		//ﾊﾟﾜｰﾀﾞｳﾝ解除ｺﾏﾝﾄﾞ
-	GPIO_H(SPI_SS_GPIO,SPI_SS_BIT);		//SSをﾈｹﾞｰﾄする
-	SPI_SS_WAIT();				//SSﾈｹﾞｰﾄ時間を待つ
+	spi_dis();				//ﾃﾞｨｾﾚｸﾄ
 	wait_us(3);				//ﾊﾟﾜｰｱｯﾌﾟ時間を待つ
 }
 #endif
@@ -370,6 +388,12 @@ static void mmsd_init(void);
 static void spi_init(void)
 {
 
+	//交代ﾋﾟﾝ設定
+#ifdef PCFR1_SPI			//SPIの交代ﾋﾟﾝが宣言されていたら
+	AFIO->PCFR1|=PCFR1_SPI;			//交代ﾋﾟﾝを設定する
+#endif
+
+	//SPI設定
 	spi_set();				//SPIﾎﾟｰﾄをｾｯﾄする
 #ifndef SPI_SOFT			//内蔵SPIﾓｼﾞｭｰﾙを使うとき
 	SPI1->CTLR1=0x034c;			//SPI1有効､ﾃﾞｰﾀは8ﾋﾞｯﾄ､NSSはｿﾌﾄ制御､

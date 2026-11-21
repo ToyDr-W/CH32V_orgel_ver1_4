@@ -25,8 +25,8 @@
 #define	VOICES0_VOL	100			//音声S0のﾎﾞﾘｭｰﾑ配分[%]
 #define	VOICES1_VOL	100			//音声S1のﾎﾞﾘｭｰﾑ配分[%]
 #define	VOICES2_VOL	100			//音声S2のﾎﾞﾘｭｰﾑ配分[%]
-#define	ORGEL_VOL	100			//ｵﾙｺﾞｰﾙ演奏のﾎﾞﾘｭｰﾑ配分[%]
-#define	KB0_VOL		100			//KB0演奏のﾎﾞﾘｭｰﾑ配分[%]
+#define	ORGEL_VOL	50			//ｵﾙｺﾞｰﾙ演奏のﾎﾞﾘｭｰﾑ配分[%]
+#define	KB0_VOL		50			//KB0演奏のﾎﾞﾘｭｰﾑ配分[%]
 #define	KB1_VOL		100			//KB0演奏のﾎﾞﾘｭｰﾑ配分[%]
 #define	VOICE_N		0			//音声N発声数の最大値(最大値3､
 						//　0のときは音声再生機能を実装しない)
@@ -40,11 +40,3 @@
 						//　0のときはｵﾙｺﾞｰﾙ演奏機能を実装しない)
 #define	KB_N		2			//KB演奏有効ﾊﾟｰﾄ数の最大値
 						//　(0のときはKB演奏機能を実装しない)
-#define	KB_PSN		(100000000/30/PWM_PR/SONG_PS/8+5)/10
-						//KB演奏用音価ﾌﾟﾘｽｹｰﾙ値(ﾃﾝﾎﾟ=30)
-#define	KB_EPSENV	(23000*10/PWM_PR/SONG_PS+5)/10
-						//KB演奏用ｴﾝﾍﾞﾛｰﾌﾟ処理ﾌﾟﾘｽｹｰﾙ値
-						//　EPS*ENV相当の値(23000)
-#define	KB_PPSPIT	(1000*10/PWM_PR/SONG_PS+5)/10
-						//KB演奏用ﾋﾟｯﾁﾍﾞﾝﾄﾞ処理ﾌﾟﾘｽｹｰﾙ値
-						//　PPS*PIT相当の値(1000)

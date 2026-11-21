@@ -665,8 +665,21 @@ static void apl_init(void)
 	//KB演奏の初期設定
 	//KB演奏で使う音源波形とｴﾝﾍﾞﾛｰﾌﾟ波形はmain.cで宣言しておくこと
 //DBG_C('k');
-	KB_START(0,&wave_SIN14,&enve_EXP,0);
+	KB_START(0,				//KB演奏ﾊﾟｰﾄ番号(0起算)
+		(100000000/30/PWM_PR/SONG_PS/8+5)/10,
+						//音価ﾌﾟﾘｽｹｰﾙ値(ﾃﾝﾎﾟ=30)
+		&wave_SIN14,			//音源波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽ
+		&enve_EXP,
+		(23000*10*SYS_CLK/PWM_STEP/SONG_PS+5)/10,
+						//ｴﾝﾍﾞﾛｰﾌﾟ処理ﾌﾟﾘｽｹｰﾙ値
+						//　EPS*ENV相当の値(23000)
+		0,	//&pitch_FIRE		//ﾋﾟｯﾁﾍﾞﾝﾄﾞ波形ﾃｰﾌﾞﾙｱﾄﾞﾚｽ
+		0,	//(1000*10*SYS_CLK/PWM_STEP/SONG_PS+5)/10
+						//ﾋﾟｯﾁﾍﾞﾝﾄﾞ処理ﾌﾟﾘｽｹｰﾙ値
+						//　PPS*PIT相当の値(1000)
+		255);				//音量(0～255)
 DBG_C('\n');
+DBG_C('!');
 }
 
 
@@ -901,81 +914,107 @@ static void CB_KOYUU(void)
 #endif
 
 	//KB演奏
-	res=DBG_IN();				//動作指示を受信する
-	if(('0'<=res)&&(res<='9'))		//'0'～'9'のとき
+	res=uart_in()&0x00ff;			//動作指示を受信する
+	if(res==0xff);				//入力が無効のときは何もしない
+	else if(('0'<=res)&&(res<='9'))		//'0'～'9'のとき
 	{
 DBG_C('o');
-DBG_S(res-'0');
-		SONG_SEL(res-'0');		//ｵﾙｺﾞｰﾙ演奏の曲選択
+DBG_B(res-'0');
+#if PART_N>0				//ｵﾙｺﾞｰﾙ演奏を実装するとき
+		SONG_SEL(res-'0');		//ｵﾙｺﾞｰﾙ演奏を開始する
+#endif
+#if VOICE_S>0				//ｶﾗｵｹの音声S再生を実装するとき
+		VOICES_SEL(0,res-'0');		//音声S再生を開始する
+#endif
 DBG_C('\n');
 	}
-	else if(('a'<=res)&&(res<='g'))		//'a'～'g'のとき
+	else					//'0'～'9'以外のとき
 	{
 DBG_C('k');
-		switch(res-'a')
+		switch(res)
 		{
-		case 0:				//ﾗ
-			onpu=0x0815;
+		case 'a':
+		case 'A':
+			onpu=0x0818;		//ﾄﾞ
 			break;
-		case 1:				//ｼ
-			onpu=0x0817;
+		case 'w':
+		case 'W':
+			onpu=0x0819;		//ﾄﾞ#
 			break;
-		case 2:				//ﾄﾞ
-			onpu=0x0818;
+		case 's':
+		case 'S':
+			onpu=0x081a;		//ﾚ
 			break;
-		case 3:				//ﾚ
-			onpu=0x081a;
+		case 'e':
+		case 'E':
+			onpu=0x081b;		//ﾚ#
 			break;
-		case 4:				//ﾐ
-			onpu=0x081c;
+		case 'd':
+		case 'D':
+			onpu=0x081c;		//ﾐ
 			break;
-		case 5:				//ﾌｧ
-			onpu=0x081d;
+		case 'f':
+		case 'F':
+			onpu=0x081d;		//ﾌｧ
 			break;
-		case 6:				//ｿ
-			onpu=0x081f;
+		case 't':
+		case 'T':
+			onpu=0x081e;		//ﾌｧ#
 			break;
+		case 'g':
+		case 'G':
+			onpu=0x081f;		//ｿ
+			break;
+		case 'y':
+		case 'Y':
+			onpu=0x0820;		//ｿ#
+			break;
+		case 'h':
+		case 'H':
+			onpu=0x0821;		//ﾗ
+			break;
+		case 'u':
+		case 'U':
+			onpu=0x0822;		//ﾗ#
+			break;
+		case 'j':
+		case 'J':
+			onpu=0x0823;		//ｼ
+			break;
+		case 'k':
+		case 'K':
+			onpu=0x0824;		//ﾄﾞ
+			break;
+		case 'o':
+		case 'O':
+			onpu=0x0825;		//ﾄﾞ#
+			break;
+		case 'l':
+		case 'L':
+			onpu=0x0826;		//ﾚ
+			break;
+		case 'p':
+		case 'P':
+			onpu=0x0827;		//ﾚ#
+			break;
+		case ';':
+			onpu=0x0828;		//ﾐ
+			break;
+		case ':':
+			onpu=0x0829;		//ﾌｧ
+			break;
+		case '[':
+			onpu=0x082a;		//ﾌｧ#
+			break;
+		case ']':
+			onpu=0x082b;		//ｿ
+			break;
+		default:
+			onpu=0;			//停止
 		}
-		KB_ONPU(0,onpu);		//KB演奏の音符設定
 DBG_S(onpu);
 DBG_C('\n');
-	}
-	else if(('A'<=res)&&(res<='G'))		//'A'～'G'のとき
-	{
-DBG_C('k');
-		switch(res-'A')
-		{
-		case 0:				//ﾗ
-			onpu=0x0821;
-			break;
-		case 1:				//ｼ
-			onpu=0x0823;
-			break;
-		case 2:				//ﾄﾞ
-			onpu=0x0824;
-			break;
-		case 3:				//ﾚ
-			onpu=0x0826;
-			break;
-		case 4:				//ﾐ
-			onpu=0x0828;
-			break;
-		case 5:				//ﾌｧ
-			onpu=0x0829;
-			break;
-		case 6:				//ｿ
-			onpu=0x082b;
-			break;
-		}
 		KB_ONPU(0,onpu);		//KB演奏の音符設定
-DBG_S(onpu);
-DBG_C('\n');
-	}
-	else if(res==' ')
-	{
-DBG_C('s');
-		KB_ONPU(0,0);			//KB演奏の音符終了
-DBG_C('\n');
 	}
 }
 
