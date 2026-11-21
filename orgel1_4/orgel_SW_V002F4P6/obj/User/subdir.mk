@@ -23,9 +23,9 @@ C_DEPS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 User/%.o: ../User/%.c
-	@	@	riscv-none-elf-gcc -march=rv32ec_zmmul_xw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V002F4P6\Debug" -I"C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V002F4P6\Core" -I"C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V002F4P6\User" -I"C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V002F4P6\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@	@	riscv-none-elf-gcc -march=rv32ec_zmmul_xw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -I"C:\ooizumis\WCH\orgel1_4 - コピー\orgel_SW_V002F4P6\Debug" -I"C:\ooizumis\WCH\orgel1_4 - コピー\orgel_SW_V002F4P6\Core" -I"C:\ooizumis\WCH\orgel1_4 - コピー\orgel_SW_V002F4P6\User" -I"C:\ooizumis\WCH\orgel1_4 - コピー\orgel_SW_V002F4P6\Peripheral\inc" -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@	@
 User/%.o: ../User/%.s
-	@	@	riscv-none-elf-gcc -march=rv32ec_zmmul_xw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -x assembler-with-cpp -I"C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V002F4P6\Startup" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
+	@	@	riscv-none-elf-gcc -march=rv32ec_zmmul_xw -mabi=ilp32e -msmall-data-limit=0 -msave-restore -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -fno-common -Wunused -Wuninitialized  -g -x assembler-with-cpp -I"C:\ooizumis\WCH\orgel1_4 - コピー\orgel_SW_V002F4P6\Startup" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -c -o "$@" "$<"
 	@	@
 

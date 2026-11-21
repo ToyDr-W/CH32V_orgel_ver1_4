@@ -2,11 +2,12 @@
 //#define	SHDBG		//ﾃﾞﾊﾞｸﾞ情報を出力するときに宣言する
 //#define	SHBPS	115200	//ﾃﾞﾊﾞｸﾞ情報のﾎﾞｰﾚｰﾄを宣言する(ﾃﾞﾌｫﾙﾄ値は38400bps)
 //#define	SHDBG_SOFT	//ﾃﾞﾊﾞｸﾞ情報のUARTをｿﾌﾄ実装するときに宣言する		
+//#define	SHDBG_IN	//ﾃﾞﾊﾞｸﾞ情報を入力するときに宣言する(UARTのｿﾌﾄ実装は不可)
 
 //#define	I2C_SOFT	//I2Cをｿﾌﾄ実装するときに宣言する
 //#define	SPI_SOFT	//SPIをｿﾌﾄ実装するときに宣言する
-//#define	SPI2		//2線SPIのときに宣言する
-//#define	SPI3		//3線SPIのときに宣言する
+//#define	SHSPI2		//2線SPIのときに宣言する
+//#define	SHSPI3		//3線SPIのときに宣言する
 #define		SLEEP_EN	//Sleep機能を実装するときに宣言する
 //#define	KYOKU_AUTO	//ｵﾙｺﾞｰﾙ演奏を自動開始するときに宣言する
 //#define	ONSEIN_AUTO	//音声0再生を自動開始するときに宣言する
@@ -89,7 +90,7 @@ CH32V電子ｵﾙｺﾞｰﾙ演奏+音声再生ver1_4
 W25Qのﾋﾟﾝ接(標準SPIﾓｰﾄﾞ)
 1:CS(2線SPIでは10k*220pの時定数回路を介してCLKに繋ぐ)
 2:DO(2線SPI･3線SPIではDIに繋ぐ)
-3:WP(GNDに接続)
+3:WP(GNDに接続､ISPを利用する場合はVccに接続)
 4:GND
 5:DI
 6:CLK
@@ -173,7 +174,7 @@ CH32V002F4P6のﾎﾟｰﾄの割当て
 #define SPI_MOSI_BIT	6			//SPI_MOSIのﾋﾞｯﾄ
 #define SPI_SCK_GPIO	GPIOC			//SPI_SCKのﾎﾟｰﾄ
 #define SPI_SCK_BIT	5			//SPI_SCKのﾋﾞｯﾄ
-#ifdef SPI2				//2線SPIのとき
+#ifdef SHSPI2				//2線SPIのとき
 #define	SPI_SS_TIME	5			//SSﾈｹﾞｰﾄ待ち時間[us]
 #define SPI_SS_GPIO	SPI_SCK_GPIO		//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	SPI_SCK_BIT		//SPI_SSのﾋﾞｯﾄ
@@ -181,7 +182,7 @@ CH32V002F4P6のﾎﾟｰﾄの割当て
 #define SPI_SS_GPIO	GPIOC			//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	0			//SPI_SSのﾋﾞｯﾄ
 #endif
-#if defined(SPI2)||defined(SPI3)	//2線SPIまたは3線SPIのとき
+#if defined(SHSPI2)||defined(SHSPI3)	//2線SPIまたは3線SPIのとき
 #define	SPI_SOFT				//SPIをｿﾌﾄ実装する
 #define SPI_MISO_GPIO	SPI_MOSI_GPIO		//SPI_MISOのﾎﾟｰﾄ
 #define SPI_MISO_BIT	SPI_MOSI_BIT		//SPI_MISOのﾋﾞｯﾄ

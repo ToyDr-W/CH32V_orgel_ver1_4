@@ -4,7 +4,6 @@
 	.text
 	.align  2
 	.globl	SONG_IDX
-	.globl	song_idx_dmy
 
 SONG_IDX:
 	.hword	(song_idx_end-song_idx_bgn)/SONG_IDX_SZ	//ｴﾝﾄﾘ数
@@ -616,7 +615,6 @@ son_mac (song_FIRE)
 #endif
 
 song_idx_end:
-song_idx_dmy:
 	ret
 
 
