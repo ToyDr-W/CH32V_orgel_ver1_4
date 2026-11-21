@@ -23,8 +23,8 @@ User/main.o: ../User/main.c \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\Peripheral\inc/ch32v00X_opa.h \
  C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\Peripheral\inc/ch32v00X.h \
  ../User/orgel_cnf.h ../User/../../orgel.h ../User/../../dev_V006F8P6.c \
- ../User/../../common.c ../User/../../dev_I2C.c ../User/../../orgel.c \
- ../User/../../dev_PWM.c ../User/../../apl_SW.c ../User/../../func_SW.c
+ ../User/../../common.c ../User/../../orgel.c ../User/../../dev_PWM.c \
+ ../User/../../apl_SW.c
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\Peripheral\inc/ch32v00X.h:
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\Core/core_riscv.h:
 C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\User/system_ch32v00X.h:
@@ -52,8 +52,6 @@ C:\ooizumis\WCH\orgel1_4-NNN\orgel_SW_V006F8P6\Peripheral\inc/ch32v00X.h:
 ../User/../../orgel.h:
 ../User/../../dev_V006F8P6.c:
 ../User/../../common.c:
-../User/../../dev_I2C.c:
 ../User/../../orgel.c:
 ../User/../../dev_PWM.c:
 ../User/../../apl_SW.c:
-../User/../../func_SW.c:

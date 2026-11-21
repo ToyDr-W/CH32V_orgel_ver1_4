@@ -4,7 +4,7 @@
 	.text
 	.align  2
 	.globl	SONG_IDX
-	.globl	song_idx_dmy
+//	.globl	song_idx_dmy
 
 SONG_IDX:
 	.hword	(song_idx_end-song_idx_bgn)/SONG_IDX_SZ	//ｴﾝﾄﾘ数
@@ -82,8 +82,8 @@ son_mac (song_ALOHAOE3)
 //son_mac (song_AMETSUKI) 
 //#define song_AMETSUKI_DEF
  
-son_mac (song_ANNI) 
-#define song_ANNI_DEF
+//son_mac (song_ANNI) 
+//#define song_ANNI_DEF
  
 //son_mac (song_ANPANMARCH) 
 //#define song_ANPANMARCH_DEF
@@ -91,8 +91,8 @@ son_mac (song_ANNI)
 //son_mac (song_ANPANTAISO) 
 //#define song_ANPANTAISO_DEF
  
-//son_mac (song_AOIMENO)
-//#define song_AOIMENO_DEF
+son_mac (song_AOIMENO)
+#define song_AOIMENO_DEF
  
 //son_mac (song_ARIA)
 //#define song_ARIA_DEF
@@ -124,8 +124,8 @@ son_mac (song_BANANABOAT)
 //son_mac (song_BOLERO) 
 //#define song_BOLERO_DEF
  
-//son_mac (song_BRAHMS) 
-//#define song_BRAHMS_DEF
+son_mac (song_BRAHMS) 
+#define song_BRAHMS_DEF
  
 //son_mac (song_BROWNJUG3) 
 //#define song_BROWNJUG3_DEF
@@ -274,8 +274,8 @@ son_mac (song_BANANABOAT)
 //son_mac (song_ITOMAKI) 
 //#define song_ITOMAKI_DEF
  
-//son_mac (song_JAMAICA) 
-//#define song_JAMAICA_DEF
+son_mac (song_JAMAICA) 
+#define song_JAMAICA_DEF
  
 //son_mac (song_JINGLE) 
 //#define song_JINGLE_DEF
@@ -301,8 +301,8 @@ son_mac (song_BANANABOAT)
 //son_mac (song_KATYUSHA) 
 //#define song_KATYUSHA_DEF
  
-//son_mac (song_KAWAIANOKO) 
-//#define song_KAWAIANOKO_DEF
+son_mac (song_KAWAIANOKO) 
+#define song_KAWAIANOKO_DEF
  
 //son_mac (song_KENTUCKY) 
 //#define song_KENTUCKY_DEF
@@ -346,8 +346,8 @@ son_mac (song_BANANABOAT)
 //son_mac (song_MAKIBAWA) 
 //#define song_MAKIBAWA_DEF
  
-//son_mac (song_MAMASOBA) 
-//#define song_MAMASOBA_DEF
+son_mac (song_MAMASOBA) 
+#define song_MAMASOBA_DEF
  
 //son_mac (song_MATSUBARA) 
 //#define song_MATSUBARA_DEF
@@ -565,8 +565,8 @@ son_mac (song_BANANABOAT)
 //son_mac (song_YURIKAGO) 
 //#define song_YURIKAGO_DEF
  
-//son_mac (song_YURIKAGO3) 
-//#define song_YURIKAGO3_DEF
+son_mac (song_YURIKAGO3) 
+#define song_YURIKAGO3_DEF
  
 //son_mac (song_YUUKI100) 
 //#define song_YUUKI100_DEF
@@ -583,7 +583,7 @@ son_mac (song_BANANABOAT)
 #endif
 
 song_idx_end:
-song_idx_dmy:
+//song_idx_dmy:
 	ret
 
 
