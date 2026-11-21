@@ -17,8 +17,8 @@
 
 
 > [!NOTE]
-> ### 📥 最新データのダウンロードについて（v1.2.0正式リリースまで）
-> 開発元（名張市つつじが丘おもちゃ病院様）の公開ダウンロードファイルは随時更新されます。次のアップデートがあったときは、本リポジトリへの反映は しばらく様子を見て、安定後に **v1.2.0（安定版）** としてリリース予定です。
+> ### 📥 最新データのダウンロードについて（v1.3.0正式リリースまで）
+> 開発元（名張市つつじが丘おもちゃ病院様）の公開ダウンロードファイルは随時更新されます。次のアップデートがあったときは、本リポジトリへの反映は 2週間ほど様子を見て、安定後に **v1.3.0（安定版）** としてリリース予定です。
 > 
 >> それまでの間、最新の回路図およびプログラム一式をダウンロードするには、 リポジトリ右上にある緑色の [ <> Code ] ボタンをクリックし、メニューの一番下にある Download ZIP から一括ダウンロードできます。 
 > 若しくは、[ここをクリックしてください。 ⬇️](https://github.com/ToyDr-W/CH32V_orgel_ver1_4/archive/refs/heads/main.zip)
@@ -26,8 +26,8 @@
 >
 > ---
 >
-> ### 📥 Downloading the Latest Data (Prior to v1.2.0 Official Release)
-> The file made available for download by the developer (Nabari City Tsutsujigaoka Toy Hospital) is updated periodically. When a new update is released, it will not be immediately incorporated into this repository; instead, we will monitor it for a while, and once it has proven stable, we plan to release it as **v1.2.0 (stable version)**.
+> ### 📥 Downloading the Latest Data (Prior to v1.3.0 Official Release)
+> The file made available for download by the developer (Nabari City Tsutsujigaoka Toy Hospital) is updated periodically. When a new update is released, it will not be immediately incorporated into this repository; instead, we will monitor it for a while, and once it has proven stable, we plan to release it as **v1.3.0 (stable version)**.
 > 
 > In the meantime, [please click here to download ⬇️](https://github.com/ToyDr-W/CH32V_orgel_ver1_4/archive/refs/heads/main.zip) the latest circuit diagrams and the complete set of programs. The download (32.5 MB ZIP file) will begin immediately.
 > 
@@ -39,7 +39,7 @@
 最新情報や詳細な解説については、以下の公式ページをご確認ください。
 
 * **開発者公式ブログ:** [名張市つつじが丘おもちゃ病院](https://tutujith.blog.fc2.com/)
-* **解説記事:** [ＣＨ３２Ｖ電子オルゴールVer1_4（ｏｒｇｅｌエンジンからデバイス固有処理を排除）](https://tutujith.blog.fc2.com/blog-entry-1080.html)
+* **解説記事:** [ＣＨ３２Ｖ電子オルゴールVer1_4（ＳＰＩフラッシュのＩＳＰ書き込みのサポート）](https://tutujith.blog.fc2.com/blog-entry-1094.html)
 * **オリジナル配布元:** [Google ドライブ - プロジェクト一式（ZIP）](https://drive.google.com/file/d/1VTEDq0syiOJBNhCu1rtrU9yLFlnYymse/view?usp=sharing)
 
 ---
@@ -50,6 +50,9 @@
 <summary>クリックして詳細を展開 / Click to view details</summary>
 
 ### 📄 本リポジトリの更新情報
+- **2026/11/22**: v1.2.0 （改版リリース、安定版） 2026/11/4 ＳＰＩフラッシュのＩＳＰ書き込みのサポート
+- **2026/11/22**: v1.0.2 README.md に更新情報を追加 2026/11/21までの update を取込み済み
+- **2026/11/22**: v1.0.1 2026/11/4の公開を取り込み ＳＰＩフラッシュのＩＳＰ書き込みのサポート
 - **2026/10/14**: v1.0.0 （GitHub開始時、安定版） 2026/9/3 ｏｒｇｅｌエンジンからデバイス固有処理を排除
 
 </details>
