@@ -38,9 +38,11 @@
 
 最新情報や詳細な解説については、以下の公式ページをご確認ください。
 
-* **開発者公式ブログ:** [名張市つつじが丘おもちゃ病院](https://tutujith.blog.fc2.com/)
-* **解説記事:** [ＣＨ３２Ｖ電子オルゴールVer1_4（ＳＰＩフラッシュのＩＳＰ書き込みのサポート）](https://tutujith.blog.fc2.com/blog-entry-1094.html)
-* **オリジナル配布元:** [Google ドライブ - プロジェクト一式（ZIP）](https://drive.google.com/file/d/1VTEDq0syiOJBNhCu1rtrU9yLFlnYymse/view?usp=sharing)
+*※外部サイトは Ctrl（MacはCmd）キーを押しながらクリックすると別タブで開けます。*
+
+* **開発者公式ブログ:** [名張市つつじが丘おもちゃ病院 ↗](https://tutujith.blog.fc2.com/)
+* **解説記事:** [ＣＨ３２Ｖ電子オルゴールVer1_4（ＳＰＩフラッシュのＩＳＰ書き込みのサポート） ↗](https://tutujith.blog.fc2.com/blog-entry-1094.html)
+* **オリジナル配布元:** [Google ドライブ - プロジェクト一式（ZIP） ↗](https://drive.google.com/file/d/1VTEDq0syiOJBNhCu1rtrU9yLFlnYymse/view?usp=sharing)
 
 ---
 
