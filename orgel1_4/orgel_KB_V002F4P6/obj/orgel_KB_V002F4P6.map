@@ -61,119 +61,116 @@ END GROUP
  *fill*         0x00000000000000a6        0x2 
                 0x00000000000000a8                _einit = .
 
-.text           0x00000000000000a8     0x3580
+.text           0x00000000000000a8     0x276c
                 0x00000000000000a8                . = ALIGN (0x4)
  *(.text)
- .text          0x00000000000000a8     0x2acc ./User/song_idx.o
+ .text          0x00000000000000a8     0x1c66 ./User/song_idx.o
                 0x00000000000000a8                SONG_IDX
-                0x00000000000000c0                song_idx_dmy
-                0x00000000000000c2                enve_EXP
-                0x0000000000000102                enve_RSN
-                0x0000000000000282                enve_ELEGANTE
-                0x0000000000000382                wave_SIN14
-                0x0000000000000482                wave_SHEPARD
-                0x0000000000000582                wave_RING4
- .text          0x0000000000002b74       0x14 c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/rv32ec_zmmul_xw/ilp32e\libgcc.a(save-restore.o)
-                0x0000000000002b74                __riscv_save_1
-                0x0000000000002b74                __riscv_save_2
-                0x0000000000002b74                __riscv_save_0
-                0x0000000000002b7e                __riscv_restore_0
-                0x0000000000002b7e                __riscv_restore_1
-                0x0000000000002b7e                __riscv_restore_2
- .text          0x0000000000002b88       0x10 c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/lib/rv32ec_zmmul_xw/ilp32e\libg_nano.a(lib_a-memset.o)
-                0x0000000000002b88                memset
+                0x00000000000000d0                song_idx_dmy
+                0x00000000000000d2                enve_EXP
+                0x0000000000000112                enve_RSN
+                0x0000000000000292                enve_ELEGANTE
+                0x0000000000000392                wave_SIN14
+                0x0000000000000492                wave_SHEPARD
+                0x0000000000000592                wave_RING4
+ .text          0x0000000000001d0e       0x14 c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/rv32ec_zmmul_xw/ilp32e\libgcc.a(save-restore.o)
+                0x0000000000001d0e                __riscv_save_1
+                0x0000000000001d0e                __riscv_save_2
+                0x0000000000001d0e                __riscv_save_0
+                0x0000000000001d18                __riscv_restore_0
+                0x0000000000001d18                __riscv_restore_1
+                0x0000000000001d18                __riscv_restore_2
+ .text          0x0000000000001d22       0x10 c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/lib/rv32ec_zmmul_xw/ilp32e\libg_nano.a(lib_a-memset.o)
+                0x0000000000001d22                memset
  *(.text.*)
- .text.outpt_c  0x0000000000002b98       0x14 ./User/main.o
- .text.outpt_b  0x0000000000002bac       0x30 ./User/main.o
- .text.outpt_s  0x0000000000002bdc       0x12 ./User/main.o
+ .text.wait_us  0x0000000000001d32       0x32 ./User/main.o
+ .text.outpt_c  0x0000000000001d64       0x52 ./User/main.o
+ .text.outpt_b  0x0000000000001db6       0x30 ./User/main.o
  .text.song_init
-                0x0000000000002bee       0x6e ./User/main.o
- .text.wait_ms  0x0000000000002c5c       0x3e ./User/main.o
+                0x0000000000001de6       0x76 ./User/main.o
  .text.SystemInit
-                0x0000000000002c9a       0x42 ./User/main.o
-                0x0000000000002c9a                SystemInit
+                0x0000000000001e5c       0x42 ./User/main.o
+                0x0000000000001e5c                SystemInit
  .text.startup.main
-                0x0000000000002cdc      0x7c6 ./User/main.o
-                0x0000000000002cdc                main
+                0x0000000000001e9e      0x788 ./User/main.o
+                0x0000000000001e9e                main
  .text.TIM1_UP_IRQHandler
-                0x00000000000034a2       0x5a ./User/main.o
-                0x00000000000034a2                TIM1_UP_IRQHandler
+                0x0000000000002626       0x5a ./User/main.o
+                0x0000000000002626                TIM1_UP_IRQHandler
  .text.vector_handler
-                0x00000000000034fc        0x2 ./Startup/startup_ch32v00X.o
-                0x00000000000034fc                OPCM_IRQHandler
-                0x00000000000034fc                TIM1_CC_IRQHandler
-                0x00000000000034fc                HardFault_Handler
-                0x00000000000034fc                SysTick_Handler
-                0x00000000000034fc                PVD_IRQHandler
-                0x00000000000034fc                NMI_Handler
-                0x00000000000034fc                SPI1_IRQHandler
-                0x00000000000034fc                AWU_IRQHandler
-                0x00000000000034fc                EXTI7_0_IRQHandler
-                0x00000000000034fc                DMA1_Channel4_IRQHandler
-                0x00000000000034fc                ADC1_IRQHandler
-                0x00000000000034fc                DMA1_Channel7_IRQHandler
-                0x00000000000034fc                I2C1_EV_IRQHandler
-                0x00000000000034fc                DMA1_Channel6_IRQHandler
-                0x00000000000034fc                RCC_IRQHandler
-                0x00000000000034fc                TIM1_TRG_COM_IRQHandler
-                0x00000000000034fc                DMA1_Channel1_IRQHandler
-                0x00000000000034fc                DMA1_Channel5_IRQHandler
-                0x00000000000034fc                DMA1_Channel3_IRQHandler
-                0x00000000000034fc                WWDG_IRQHandler
-                0x00000000000034fc                TIM2_IRQHandler
-                0x00000000000034fc                SW_Handler
-                0x00000000000034fc                TIM1_BRK_IRQHandler
-                0x00000000000034fc                USART2_IRQHandler
-                0x00000000000034fc                DMA1_Channel2_IRQHandler
-                0x00000000000034fc                FLASH_IRQHandler
-                0x00000000000034fc                USART1_IRQHandler
-                0x00000000000034fc                I2C1_ER_IRQHandler
+                0x0000000000002680        0x2 ./Startup/startup_ch32v00X.o
+                0x0000000000002680                OPCM_IRQHandler
+                0x0000000000002680                TIM1_CC_IRQHandler
+                0x0000000000002680                HardFault_Handler
+                0x0000000000002680                SysTick_Handler
+                0x0000000000002680                PVD_IRQHandler
+                0x0000000000002680                NMI_Handler
+                0x0000000000002680                SPI1_IRQHandler
+                0x0000000000002680                AWU_IRQHandler
+                0x0000000000002680                EXTI7_0_IRQHandler
+                0x0000000000002680                DMA1_Channel4_IRQHandler
+                0x0000000000002680                ADC1_IRQHandler
+                0x0000000000002680                DMA1_Channel7_IRQHandler
+                0x0000000000002680                I2C1_EV_IRQHandler
+                0x0000000000002680                DMA1_Channel6_IRQHandler
+                0x0000000000002680                RCC_IRQHandler
+                0x0000000000002680                TIM1_TRG_COM_IRQHandler
+                0x0000000000002680                DMA1_Channel1_IRQHandler
+                0x0000000000002680                DMA1_Channel5_IRQHandler
+                0x0000000000002680                DMA1_Channel3_IRQHandler
+                0x0000000000002680                WWDG_IRQHandler
+                0x0000000000002680                TIM2_IRQHandler
+                0x0000000000002680                SW_Handler
+                0x0000000000002680                TIM1_BRK_IRQHandler
+                0x0000000000002680                USART2_IRQHandler
+                0x0000000000002680                DMA1_Channel2_IRQHandler
+                0x0000000000002680                FLASH_IRQHandler
+                0x0000000000002680                USART1_IRQHandler
+                0x0000000000002680                I2C1_ER_IRQHandler
  .text.handle_reset
-                0x00000000000034fe       0x8a ./Startup/startup_ch32v00X.o
-                0x00000000000034fe                handle_reset
+                0x0000000000002682       0x8a ./Startup/startup_ch32v00X.o
+                0x0000000000002682                handle_reset
  *(.rodata)
  *(.rodata*)
- *fill*         0x0000000000003588        0x0 
- .rodata.CSWTCH.36
-                0x0000000000003588        0xc ./User/main.o
- .rodata.CSWTCH.35
-                0x0000000000003594        0xc ./User/main.o
+ *fill*         0x000000000000270c        0x0 
+ .rodata.CSWTCH.40
+                0x000000000000270c       0x80 ./User/main.o
  .rodata.onkou_tbl
-                0x00000000000035a0       0x18 ./User/main.o
+                0x000000000000278c       0x18 ./User/main.o
  .rodata.onkou_mei_tbl
-                0x00000000000035b8       0x40 ./User/main.o
+                0x00000000000027a4       0x40 ./User/main.o
  .rodata.port_tbl
-                0x00000000000035f8       0x15 ./User/main.o
- *fill*         0x000000000000360d        0x3 
+                0x00000000000027e4       0x15 ./User/main.o
+ *fill*         0x00000000000027f9        0x3 
  .rodata.onka_tbl
-                0x0000000000003610       0x15 ./User/main.o
+                0x00000000000027fc       0x15 ./User/main.o
  *(.gnu.linkonce.t.*)
-                0x0000000000003628                . = ALIGN (0x4)
- *fill*         0x0000000000003625        0x3 
+                0x0000000000002814                . = ALIGN (0x4)
+ *fill*         0x0000000000002811        0x3 
 
-.rela.dyn       0x0000000000003628        0x0
- .rela.init     0x0000000000003628        0x0 ./User/main.o
+.rela.dyn       0x0000000000002814        0x0
+ .rela.init     0x0000000000002814        0x0 ./User/main.o
  .rela.text.handle_reset
-                0x0000000000003628        0x0 ./User/main.o
+                0x0000000000002814        0x0 ./User/main.o
 
-.fini           0x0000000000003628        0x0
+.fini           0x0000000000002814        0x0
  *(SORT_NONE(.fini))
-                0x0000000000003628                . = ALIGN (0x4)
+                0x0000000000002814                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (_etext = .)
                 [!provide]                        PROVIDE (_eitcm = .)
 
-.preinit_array  0x0000000000003628        0x0
+.preinit_array  0x0000000000002814        0x0
                 [!provide]                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                        PROVIDE (__preinit_array_end = .)
 
-.init_array     0x0000000000003628        0x0
+.init_array     0x0000000000002814        0x0
                 [!provide]                        PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
                 [!provide]                        PROVIDE (__init_array_end = .)
 
-.fini_array     0x0000000000003628        0x0
+.fini_array     0x0000000000002814        0x0
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
@@ -193,15 +190,15 @@ END GROUP
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
 
-.dalign         0x0000000020000000        0x0 load address 0x0000000000003628
+.dalign         0x0000000020000000        0x0 load address 0x0000000000002814
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_data_vma = .)
 
-.dlalign        0x0000000000003628        0x0
-                0x0000000000003628                . = ALIGN (0x4)
-                0x0000000000003628                PROVIDE (_data_lma = .)
+.dlalign        0x0000000000002814        0x0
+                0x0000000000002814                . = ALIGN (0x4)
+                0x0000000000002814                PROVIDE (_data_lma = .)
 
-.data           0x0000000020000000        0x0 load address 0x0000000000003628
+.data           0x0000000020000000        0x0 load address 0x0000000000002814
                 0x0000000020000000                . = ALIGN (0x4)
  *(.gnu.linkonce.r.*)
  *(.data .data.*)
@@ -220,7 +217,7 @@ END GROUP
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_edata = .)
 
-.bss            0x0000000020000000      0x204 load address 0x0000000000003628
+.bss            0x0000000020000000      0x204 load address 0x0000000000002814
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                PROVIDE (_sbss = .)
  *(.sbss*)
@@ -250,58 +247,58 @@ END GROUP
                 0x0000000020001000                PROVIDE (_eusrstack = .)
 OUTPUT(orgel_KB_V002F4P6.elf elf32-littleriscv)
 
-.debug_info     0x0000000000000000     0x163a
- .debug_info    0x0000000000000000     0x15f2 ./User/main.o
- .debug_info    0x00000000000015f2       0x25 ./User/song_idx.o
- .debug_info    0x0000000000001617       0x23 ./Startup/startup_ch32v00X.o
+.debug_info     0x0000000000000000     0x16ac
+ .debug_info    0x0000000000000000     0x1664 ./User/main.o
+ .debug_info    0x0000000000001664       0x25 ./User/song_idx.o
+ .debug_info    0x0000000000001689       0x23 ./Startup/startup_ch32v00X.o
 
-.debug_abbrev   0x0000000000000000      0x498
- .debug_abbrev  0x0000000000000000      0x472 ./User/main.o
- .debug_abbrev  0x0000000000000472       0x14 ./User/song_idx.o
- .debug_abbrev  0x0000000000000486       0x12 ./Startup/startup_ch32v00X.o
+.debug_abbrev   0x0000000000000000      0x456
+ .debug_abbrev  0x0000000000000000      0x430 ./User/main.o
+ .debug_abbrev  0x0000000000000430       0x14 ./User/song_idx.o
+ .debug_abbrev  0x0000000000000444       0x12 ./Startup/startup_ch32v00X.o
 
 .debug_loclists
-                0x0000000000000000      0x50d
+                0x0000000000000000      0x5b8
  .debug_loclists
-                0x0000000000000000      0x50d ./User/main.o
+                0x0000000000000000      0x5b8 ./User/main.o
 
-.debug_aranges  0x0000000000000000       0xa8
+.debug_aranges  0x0000000000000000       0xa0
  .debug_aranges
-                0x0000000000000000       0x58 ./User/main.o
+                0x0000000000000000       0x50 ./User/main.o
  .debug_aranges
-                0x0000000000000058       0x20 ./User/song_idx.o
+                0x0000000000000050       0x20 ./User/song_idx.o
  .debug_aranges
-                0x0000000000000078       0x30 ./Startup/startup_ch32v00X.o
+                0x0000000000000070       0x30 ./Startup/startup_ch32v00X.o
 
 .debug_rnglists
-                0x0000000000000000      0x174
+                0x0000000000000000      0x1b5
  .debug_rnglists
-                0x0000000000000000      0x153 ./User/main.o
+                0x0000000000000000      0x194 ./User/main.o
  .debug_rnglists
-                0x0000000000000153       0x21 ./Startup/startup_ch32v00X.o
+                0x0000000000000194       0x21 ./Startup/startup_ch32v00X.o
 
-.debug_line     0x0000000000000000     0x1e9b
- .debug_line    0x0000000000000000     0x1d42 ./User/main.o
- .debug_line    0x0000000000001d42       0x4b ./User/song_idx.o
- .debug_line    0x0000000000001d8d      0x10e ./Startup/startup_ch32v00X.o
+.debug_line     0x0000000000000000     0x1ee7
+ .debug_line    0x0000000000000000     0x1d8e ./User/main.o
+ .debug_line    0x0000000000001d8e       0x4b ./User/song_idx.o
+ .debug_line    0x0000000000001dd9      0x10e ./Startup/startup_ch32v00X.o
 
-.debug_str      0x0000000000000000      0x8a5
- .debug_str     0x0000000000000000      0x835 ./User/main.o
-                                        0x8f8 (size before relaxing)
- .debug_str     0x0000000000000835       0x52 ./User/song_idx.o
- .debug_str     0x0000000000000887       0x1e ./Startup/startup_ch32v00X.o
+.debug_str      0x0000000000000000      0x8bd
+ .debug_str     0x0000000000000000      0x84d ./User/main.o
+                                        0x917 (size before relaxing)
+ .debug_str     0x000000000000084d       0x52 ./User/song_idx.o
+ .debug_str     0x000000000000089f       0x1e ./Startup/startup_ch32v00X.o
                                          0x5d (size before relaxing)
 
 .debug_line_str
-                0x0000000000000000      0x222
+                0x0000000000000000      0x22d
  .debug_line_str
-                0x0000000000000000      0x1f9 ./User/main.o
-                                        0x23a (size before relaxing)
+                0x0000000000000000      0x204 ./User/main.o
+                                        0x245 (size before relaxing)
  .debug_line_str
-                0x00000000000001f9        0xb ./User/song_idx.o
+                0x0000000000000204        0xb ./User/song_idx.o
                                          0x51 (size before relaxing)
  .debug_line_str
-                0x0000000000000204       0x1e ./Startup/startup_ch32v00X.o
+                0x000000000000020f       0x1e ./Startup/startup_ch32v00X.o
                                          0x64 (size before relaxing)
 
 .comment        0x0000000000000000       0x31
@@ -321,5 +318,5 @@ OUTPUT(orgel_KB_V002F4P6.elf elf32-littleriscv)
  .riscv.attributes
                 0x00000000000000ba       0x2e c:/mounriver/mounriver_studio/toolchain/risc-v embedded gcc12/bin/../lib/gcc/riscv-none-elf/12.2.0/../../../../riscv-none-elf/lib/rv32ec_zmmul_xw/ilp32e\libg_nano.a(lib_a-memset.o)
 
-.debug_frame    0x0000000000000000       0xcc
- .debug_frame   0x0000000000000000       0xcc ./User/main.o
+.debug_frame    0x0000000000000000       0xc4
+ .debug_frame   0x0000000000000000       0xc4 ./User/main.o

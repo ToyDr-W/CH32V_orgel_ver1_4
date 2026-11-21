@@ -3,13 +3,12 @@
 #define		SHDBG		//ﾃﾞﾊﾞｸﾞ情報を出力するときに宣言する
 //#define	SHBPS	115200	//ﾃﾞﾊﾞｸﾞ情報のﾎﾞｰﾚｰﾄを宣言する(ﾃﾞﾌｫﾙﾄ値は38400bps)
 //#define	SHDBG_SOFT	//ﾃﾞﾊﾞｸﾞ情報のUARTをｿﾌﾄ実装するときに宣言する		
-				//下記行は､ﾃﾞﾊﾞｸﾞ入力で制御するため有効にしておくこと
-#define		SHDBG_IN	//ﾃﾞﾊﾞｸﾞ情報を入力するときに宣言する(UARTのｿﾌﾄ実装は不可)
+//#define	SHDBG_IN	//ﾃﾞﾊﾞｸﾞ情報を入力するときに宣言する(UARTのｿﾌﾄ実装は不可)
 
 //#define	I2C_SOFT	//I2Cをｿﾌﾄ実装するときに宣言する
 //#define	SPI_SOFT	//SPIをｿﾌﾄ実装するときに宣言する
-//#define	SPI2		//2線SPIのときに宣言する
-//#define	SPI3		//3線SPIのときに宣言する
+//#define	SHSPI2		//2線SPIのときに宣言する
+//#define	SHSPI3		//3線SPIのときに宣言する
 //#define	SLEEP_EN	//Sleep機能を実装するときに宣言する
 //#define	KYOKU_AUTO	//ｵﾙｺﾞｰﾙ演奏を自動開始するときに宣言する
 //#define	ONSEIN_AUTO	//音声0再生を自動開始するときに宣言する
@@ -35,28 +34,26 @@
 #define		VOICEI_IMA	//音声IがIMA_ADPCMｴﾝｺｰﾄﾞのときに宣言する
 #define		VOICES_IMA	//音声SがIMA_ADPCMｴﾝｺｰﾄﾞのときに宣言する
 
+//#define	ISP_SPIFLASH_EN	//ISP環境でSPIﾌﾗｯｼｭを書替えるときに宣言する
+				//(自動的に､ﾃﾞﾊﾞｸﾞ情報のUART内蔵ﾓｼﾞｭｰﾙを230400bpsで使用する)
+				//(通常のｱﾌﾟﾘは実行されない)
+
 
 /*
 CH32V電子ｵﾙｺﾞｰﾙ演奏+音声再生ver1_4
 これは根のｿｰｽｺｰﾄﾞ
 
+・ISP形態でSPIﾌﾗｯｼｭを書替える機能(ISP_SPIFLASH)に対応している｡
+
 ・ﾀｰｹﾞｯﾄはCH32V002A4M6(内部48MHzｸﾛｯｸ)
 
-・複数のSW･単数のCdS･複数のCVDを実装可能｡但しﾎﾟｰﾄ割当てが可能なもの｡
-・それぞれをｵﾙｺﾞｰﾙ演奏･ﾌﾗｯｼｭ音声再生･ﾌﾟﾛｸﾞﾗﾑ音声再生の開始･中断に充てることができる｡
-・短ｵﾝで開始､長ｵﾝで中断する｡
-・曲･音声はﾗｳﾝﾄﾞﾛﾋﾞﾝ･ﾗﾝﾀﾞﾑが可能｡
+・UARTから受信したKB演奏ﾃﾞｰﾀに従って､orgelｴﾝｼﾞﾝへ音符ｺｰﾄﾞを送って演奏させる｡
 
-・SWはﾎﾟｰﾄ-GND間に設置し､負論理(導通=L)で入力する｡
+・白鍵と黒鍵をPCのｷｰﾎﾞｰﾄﾞ上に配置して演奏する｡
 
-・CdSはﾎﾟｰﾄ-GND間に設置し､正論理(暗=H)で入力する｡
+・UARTから受信したｵﾙｺﾞｰﾙ演奏､或いはSPI音声再生の指示ﾃﾞｰﾀに従って､それらを起動する｡
 
-・CVDはCVDﾊﾟｯﾄﾞから10kΩの抵抗を介してﾎﾟｰﾄに入力する｡
-　10kΩはﾎﾟｰﾄ保護のためであり､必須ではない｡
-
-・xxxx_AUTOを宣言することで､自動的に曲を演奏開始､及び音声を再生開始する｡
-
-・音声ﾃﾞｰﾀはﾌﾟﾛｸﾞﾗﾑﾒﾓﾘ､I2Cﾌﾗｯｼｭ､SDｶｰﾄﾞ､SPIﾌﾗｯｼｭに格納しておく｡
+・その他の音声再生機能は､このｻﾝﾌﾟﾙｱﾌﾟﾘでは実装していない
 
 
 //==============================================
@@ -92,7 +89,7 @@ CH32V電子ｵﾙｺﾞｰﾙ演奏+音声再生ver1_4
 W25Qのﾋﾟﾝ接(標準SPIﾓｰﾄﾞ)
 1:CS(2線SPIでは10k*220pの時定数回路を介してCLKに繋ぐ)
 2:DO(2線SPI･3線SPIではDIに繋ぐ)
-3:WP(GNDに接続)
+3:WP(GNDに接続､ISPを利用する場合はVccに接続)
 4:GND
 5:DI
 6:CLK
@@ -103,8 +100,6 @@ W25Qのﾋﾟﾝ接(標準SPIﾓｰﾄﾞ)
 //==============================================
 //CH32Vのﾋﾟﾝ接
 //SPI_SCKがﾋﾟﾝに出ていないのでｿﾌﾄ実装するしかない
-//内蔵SPIﾓｼﾞｭｰﾙが使えないので4線SPIはﾒﾘｯﾄが無く､ｻﾎﾟｰﾄしない
-//各ﾋﾟﾝは1つの機能のみ､但しSPIとSWは共用可能
 //==============================================
 CH32V002A4M6のﾎﾟｰﾄの割当て
 1:(PC1)SDA/(I2C_SDA)(24FCのSDAに繋ぐ)
@@ -114,15 +109,15 @@ CH32V002A4M6のﾎﾟｰﾄの割当て
 5:(PC6)SW0入力･MOSI(SDCのDI･W25QのDIに繋ぐ)
 6:(PC7)SW1入力･MISO(SDCのDO･W25QのDOに繋ぐ､3線SPI･2線SPIのときは不使用)
 7:(PD1)SW2入力･SCK(SDCのCLK･W25QのCLKに繋ぐ､2線SPIのときは不使用)/(SWIO)
-8:(PD4)LED3､SS(SDCのCS･W25QのCSに繋ぐ)
-9:(PD5)ﾃﾞﾊﾞｸﾞ信号出力/(UART1_TX)ﾃﾞﾊﾞｸﾞ情報出力
-10:(PD6)/(UART1_RX)ﾃﾞﾊﾞｸﾞ情報入力
+8:(PD4)SS(SDCのCS･W25QのCSに繋ぐ)
+9:(PD5)/(UTX_)UART出力
+10:(PD6)/(URX_)UART入力
 11:(PD7)LED0出力/(RST)
 12:(PA1)LED1出力/(A1)CVD0入力
-13:(PA2)SW4/(A0)CdS入力･CVD1入力
+13:(PA2)SW3/(A0)CdS入力･CVD1入力
 14:VSS
 15:VDD
-16:(PC0)SW3入力･ﾃﾞﾊﾞｸﾞ信号出力
+16:(PC0)SW4入力､ﾃﾞﾊﾞｸﾞ信号出力､ﾃﾞﾊﾞｸﾞ情報出力
 */
 
 
@@ -148,15 +143,20 @@ CH32V002A4M6のﾎﾟｰﾄの割当て
 						//T1CH3はPC3､T1CH4はPC4
 #endif
 
+//UARTのﾎﾟｰﾄ定義
+#define	UART_GPIO	GPIOD			//UART出力のﾎﾟｰﾄ
+#define	UART_BIT	5			//UART出力のﾋﾞｯﾄ
+#define	UART_IN_GPIO	GPIOD			//UART入力のﾎﾟｰﾄ
+#define	UART_IN_BIT	6			//UART入力のﾋﾞｯﾄ
+
 //ﾃﾞﾊﾞｸﾞ信号のﾎﾟｰﾄ定義
-#define	DBS_GPIO	GPIOC			//ﾃﾞﾊﾞｸﾞ信号出力のﾎﾟｰﾄ
-#define	DBS_BIT		0			//ﾃﾞﾊﾞｸﾞ信号出力のﾋﾞｯﾄ
+#define	DBS_GPIO	GPIOC			//ﾃﾞﾊﾞｸﾞ信号のﾎﾟｰﾄ
+#define	DBS_BIT		0			//ﾃﾞﾊﾞｸﾞ信号のﾋﾞｯﾄ
 
 //ﾃﾞﾊﾞｸﾞ情報のﾎﾟｰﾄ定義
-#define	DBG_GPIO	GPIOD			//ﾃﾞﾊﾞｸﾞ情報出力のﾎﾟｰﾄ
-#define	DBG_BIT		5			//ﾃﾞﾊﾞｸﾞ情報出力のﾋﾞｯﾄ
-#define	DBG_IN_GPIO	GPIOD			//ﾃﾞﾊﾞｸﾞ情報入力のﾎﾟｰﾄ
-#define	DBG_IN_BIT	6			//ﾃﾞﾊﾞｸﾞ情報入力のﾋﾞｯﾄ
+#define	SHDBG_SOFT				//ﾃﾞﾊﾞｸﾞ情報のUARTをｿﾌﾄ実装する
+#define	DBG_GPIO	GPIOC			//ﾃﾞﾊﾞｸﾞ情報出力のﾎﾟｰﾄ
+#define	DBG_BIT		0			//ﾃﾞﾊﾞｸﾞ情報出力のﾋﾞｯﾄ
 
 //PWMのﾎﾟｰﾄ定義
 #define	PWM_F_GPIO	GPIOC			//PWM正相のﾎﾟｰﾄ
@@ -176,19 +176,17 @@ CH32V002A4M6のﾎﾟｰﾄの割当て
 #define	SPI_SOFT				//SPIをｿﾌﾄ実装する
 #define SPI_MOSI_GPIO	GPIOC			//SPI_MOSIのﾎﾟｰﾄ
 #define SPI_MOSI_BIT	6			//SPI_MOSIのﾋﾞｯﾄ
-#ifdef SPI2				//2線SPIのとき
 #define SPI_SCK_GPIO	GPIOD			//SPI_SCKのﾎﾟｰﾄ
-#define SPI_SCK_BIT	4			//SPI_SCKのﾋﾞｯﾄ
+#define SPI_SCK_BIT	1			//SPI_SCKのﾋﾞｯﾄ
+#ifdef SHSPI2				//2線SPIのとき
 #define	SPI_SS_TIME	5			//SSﾈｹﾞｰﾄ待ち時間[us]
 #define SPI_SS_GPIO	SPI_SCK_GPIO		//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	SPI_SCK_BIT		//SPI_SSのﾋﾞｯﾄ
 #else					//3線SPIまたは4線SPIのとき
-#define SPI_SCK_GPIO	GPIOD			//SPI_SCKのﾎﾟｰﾄ
-#define SPI_SCK_BIT	1			//SPI_SCKのﾋﾞｯﾄ
 #define SPI_SS_GPIO	GPIOD			//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	4			//SPI_SSのﾋﾞｯﾄ
 #endif
-#if defined(SPI2)||defined(SPI3)	//2線SPIまたは3線SPIのとき
+#if defined(SHSPI2)||defined(SHSPI3)	//2線SPIまたは3線SPIのとき
 #define SPI_MISO_GPIO	SPI_MOSI_GPIO		//SPI_MISOのﾎﾟｰﾄ
 #define SPI_MISO_BIT	SPI_MOSI_BIT		//SPI_MISOのﾋﾞｯﾄ
 #else					//4線SPIのとき
@@ -481,5 +479,15 @@ static const struct VOICES_HDR voiceS_idx[]=
 //==============================================
 //共通ｺｰﾄﾞの呼込み
 //==============================================
-#include "../../dev_V002A4M6.c"			//V002A4M6ﾃﾞﾊﾞｲｽｺｰﾄﾞ
+#ifdef ISP_SPIFLASH_EN			//ISP環境でSPIﾌﾗｯｼｭを書替えるとき
+#define	UARTBPS	230400				//UARTは230400bps
+#define	UART_TX					//UART送信を使う
+#define	UART_RX					//UART受信を使う
+#include "../../dev_V002A4M6.c"			//V002F4P6ﾃﾞﾊﾞｲｽｺｰﾄﾞ
+#include "../../apl_ISP_SPIFLASH.c"		//ISP実行ｱﾌﾟﾘｹｰｼｮﾝ
+#else					//KB演奏のとき
+#define	UARTBPS	38400				//UARTは38400bps
+#define	UART_RX					//UART受信を使う
+#include "../../dev_V002A4M6.c"			//V002F4P6ﾃﾞﾊﾞｲｽｺｰﾄﾞ
 #include "../../apl_KB.c"			//KB操作ｱﾌﾟﾘｹｰｼｮﾝ
+#endif
