@@ -3,12 +3,12 @@
 //#define	SHDBS		//ﾃﾞﾊﾞｸﾞ信号を取得するときに宣言する
 
 //#define	I2C_SOFT	//I2Cをｿﾌﾄ実装するときに宣言する
-//#define	SPI2		//2線SPIのときに宣言する
-//#define	SPI3		//3線SPIのときに宣言する
+//#define	SHSPI2		//2線SPIのときに宣言する
+//#define	SHSPI3		//3線SPIのときに宣言する
 //#define	SPI_SOFT	//SPIをｿﾌﾄ実装するときに宣言する
 
-//#define	MFRC_SPI3	//3線SPIのときに宣言する
-#define		MFRC_SPI2	//2線SPIのときに宣言する
+//#define	MFRC_SHSPI3	//3線SPIのときに宣言する
+#define		MFRC_SHSPI2	//2線SPIのときに宣言する
 
 
 /*
@@ -55,7 +55,7 @@ CH32V電子ｵﾙｺﾞｰﾙ演奏+音声再生ver1_4
 W25Qのﾋﾟﾝ接(標準SPIﾓｰﾄﾞ)
 1:CS(2線SPIでは10k*220pの時定数回路を介してCLKに繋ぐ)
 2:DO(2線SPI･3線SPIではDIに繋ぐ)
-3:WP(GNDに接続)
+3:WP(GNDに接続､ISPを利用する場合はVccに接続)
 4:GND
 5:DI
 6:CLK
@@ -157,7 +157,7 @@ CH32V003F4P6のﾎﾟｰﾄの割当て
 #define SPI_MOSI_BIT	6			//SPI_MOSIのﾋﾞｯﾄ
 #define SPI_SCK_GPIO	GPIOC			//SPI_SCKのﾎﾟｰﾄ
 #define SPI_SCK_BIT	5			//SPI_SCKのﾋﾞｯﾄ
-#ifdef SPI2				//2線SPIのとき
+#ifdef SHSPI2				//2線SPIのとき
 #define	SPI_SS_TIME	5			//SSﾈｹﾞｰﾄ待ち時間[us]
 #define SPI_SS_GPIO	GSPI_SCK_GPIO		//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	SPI_SCK_BIT		//SPI_SSのﾋﾞｯﾄ
@@ -165,7 +165,7 @@ CH32V003F4P6のﾎﾟｰﾄの割当て
 #define SPI_SS_GPIO	GPIOC			//SPI_SSのﾎﾟｰﾄ
 #define SPI_SS_BIT	0			//SPI_SSのﾋﾞｯﾄ
 #endif
-#if defined(SPI2)||defined(SPI3)	//2線SPIまたは3線SPIのとき
+#if defined(SHSPI2)||defined(SHSPI3)	//2線SPIまたは3線SPIのとき
 #define	SPI_SOFT				//SPIをｿﾌﾄ実装する
 #define SPI_MISO_GPIO	SPI_MOSI_GPIO		//SPI_MISOのﾎﾟｰﾄ
 #define SPI_MISO_BIT	SPI_MOSI_BIT		//SPI_MISOのﾋﾞｯﾄ
@@ -187,7 +187,7 @@ CH32V003F4P6のﾎﾟｰﾄの割当て
 #define MFRC_SCK_BIT	6			//RC522_SCKのﾋﾞｯﾄ
 #define MFRC_MOSI_GPIO	GPIOD			//RC522_MOSIのﾎﾟｰﾄ
 #define MFRC_MOSI_BIT	5			//RC522_MOSIのﾋﾞｯﾄ
-#if defined(MFRC_SPI3)||defined(MFRC_SPI2)
+#if defined(MFRC_SHSPI3)||defined(MFRC_SHSPI2)
 					//3線SPIか2線SPIのとき
 #define MFRC_MISO_GPIO	MFRC_MOSI_GPIO		//RC522_MISOのﾎﾟｰﾄ
 #define MFRC_MISO_BIT	MFRC_MOSI_BIT		//RC522_MISOのﾋﾞｯﾄ
@@ -195,7 +195,7 @@ CH32V003F4P6のﾎﾟｰﾄの割当て
 #define MFRC_MISO_GPIO	GPIOD			//RC522_MISOのﾎﾟｰﾄ
 #define MFRC_MISO_BIT	4			//RC522_MISOのﾋﾞｯﾄ
 #endif
-#ifdef  MFRC_SPI2			//2線SPIのとき
+#ifdef  MFRC_SHSPI2			//2線SPIのとき
 #define MFRC_SS_TIME	5			//SSﾈｹﾞｰﾄ待ち時間[us]
 #define MFRC_NSS_GPIO	MFRC_SCK_GPIO		//RC522_NSSのﾎﾟｰﾄ
 #define MFRC_NSS_BIT	MFRC_SCK_BIT		//RC522_NSSのﾋﾞｯﾄ

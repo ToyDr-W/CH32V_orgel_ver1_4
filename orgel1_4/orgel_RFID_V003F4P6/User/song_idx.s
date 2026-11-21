@@ -4,7 +4,7 @@
 	.text
 	.align  2
 	.globl	SONG_IDX
-	.globl	song_idx_dmy
+//	.globl	song_idx_dmy
 
 SONG_IDX:
 	.hword	(song_idx_end-song_idx_bgn)/SONG_IDX_SZ	//ｴﾝﾄﾘ数
@@ -31,8 +31,8 @@ song_idx_bgn:
 //son_mac (song__FUYU3)
 //#define song__FUYU3_DEF
 
-son_mac (song__FUYU4)
-#define song__FUYU4_DEF
+//son_mac (song__FUYU4)
+//#define song__FUYU4_DEF
 
 //son_mac (song__HARU2)
 //#define song__HARU2_DEF
@@ -40,14 +40,14 @@ son_mac (song__FUYU4)
 //son_mac (song__HARU3)
 //#define song__HARU3_DEF
 
-son_mac (song__HARU4)
-#define song__HARU4_DEF
+//son_mac (song__HARU4)
+//#define song__HARU4_DEF
  
-son_mac (song__HAWAIIAN) 
-#define song__HAWAIIAN_DEF
+//son_mac (song__HAWAIIAN) 
+//#define song__HAWAIIAN_DEF
  
-son_mac (song__INDONESIAN) 
-#define song__INDONESIAN_DEF
+//son_mac (song__INDONESIAN) 
+//#define song__INDONESIAN_DEF
  
 //son_mac (song__LATIN)
 //#define song__LATIN_DEF
@@ -58,8 +58,8 @@ son_mac (song__INDONESIAN)
 //son_mac (song__NATSU2)
 //#define song__NATSU2_DEF
  
-son_mac (song__NATSU3)
-#define song__NATSU3_DEF
+//son_mac (song__NATSU3)
+//#define song__NATSU3_DEF
  
 //son_mac (song_AIAI) 
 //#define song_AIAI_DEF
@@ -67,8 +67,8 @@ son_mac (song__NATSU3)
 //son_mac (song_AKATONBO) 
 //#define song_AKATONBO_DEF
  
-//son_mac (song_ALOHAOE3) 
-//#define song_ALOHAOE3_DEF
+son_mac (song_ALOHAOE3) 
+#define song_ALOHAOE3_DEF
  
 //son_mac (song_AMAZING) 
 //#define song_AMAZING_DEF
@@ -91,8 +91,8 @@ son_mac (song__NATSU3)
 //son_mac (song_ANPANTAISO) 
 //#define song_ANPANTAISO_DEF
  
-//son_mac (song_AOIMENO)
-//#define song_AOIMENO_DEF
+son_mac (song_AOIMENO)
+#define song_AOIMENO_DEF
  
 //son_mac (song_ARIA)
 //#define song_ARIA_DEF
@@ -109,11 +109,11 @@ son_mac (song__NATSU3)
 //son_mac (song_AWAY) 
 //#define song_AWAY_DEF
  
-//son_mac (song_BAMBA) 
-//#define song_BAMBA_DEF
+son_mac (song_BAMBA) 
+#define song_BAMBA_DEF
  
-//son_mac (song_BANANABOAT) 
-//#define song_BANANABOAT_DEF
+son_mac (song_BANANABOAT) 
+#define song_BANANABOAT_DEF
  
 //son_mac (song_BIRTHDAY) 
 //#define song_BIRTHDAY_DEF
@@ -124,8 +124,8 @@ son_mac (song__NATSU3)
 //son_mac (song_BOLERO) 
 //#define song_BOLERO_DEF
  
-//son_mac (song_BRAHMS) 
-//#define song_BRAHMS_DEF
+son_mac (song_BRAHMS) 
+#define song_BRAHMS_DEF
  
 //son_mac (song_BROWNJUG3) 
 //#define song_BROWNJUG3_DEF
@@ -274,8 +274,8 @@ son_mac (song__NATSU3)
 //son_mac (song_ITOMAKI) 
 //#define song_ITOMAKI_DEF
  
-//son_mac (song_JAMAICA) 
-//#define song_JAMAICA_DEF
+son_mac (song_JAMAICA) 
+#define song_JAMAICA_DEF
  
 //son_mac (song_JINGLE) 
 //#define song_JINGLE_DEF
@@ -301,8 +301,8 @@ son_mac (song__NATSU3)
 //son_mac (song_KATYUSHA) 
 //#define song_KATYUSHA_DEF
  
-//son_mac (song_KAWAIANOKO) 
-//#define song_KAWAIANOKO_DEF
+son_mac (song_KAWAIANOKO) 
+#define song_KAWAIANOKO_DEF
  
 //son_mac (song_KENTUCKY) 
 //#define song_KENTUCKY_DEF
@@ -346,8 +346,8 @@ son_mac (song__NATSU3)
 //son_mac (song_MAKIBAWA) 
 //#define song_MAKIBAWA_DEF
  
-//son_mac (song_MAMASOBA) 
-//#define song_MAMASOBA_DEF
+son_mac (song_MAMASOBA) 
+#define song_MAMASOBA_DEF
  
 //son_mac (song_MATSUBARA) 
 //#define song_MATSUBARA_DEF
@@ -565,8 +565,8 @@ son_mac (song__NATSU3)
 //son_mac (song_YURIKAGO) 
 //#define song_YURIKAGO_DEF
  
-//son_mac (song_YURIKAGO3) 
-//#define song_YURIKAGO3_DEF
+son_mac (song_YURIKAGO3) 
+#define song_YURIKAGO3_DEF
  
 //son_mac (song_YUUKI100) 
 //#define song_YUUKI100_DEF
@@ -583,7 +583,7 @@ son_mac (song__NATSU3)
 #endif
 
 song_idx_end:
-song_idx_dmy:
+//song_idx_dmy:
 	ret
 
 
