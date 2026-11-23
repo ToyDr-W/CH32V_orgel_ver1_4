@@ -659,6 +659,22 @@ static void apl_init(void)
 	GPIO_IN(CdS_GPIO,CdS_BIT);		//入力ﾓｰﾄﾞ
 #endif
 
+#if defined(SLEEP_EN)&&(defined(CdS_EN)||defined(CVD_EN)||defined(SW_PLNG))
+					//Sleep機能を実装するとき､且つ
+					//　CdSかCVDを実装するとき､
+					//　SWをﾎﾟｰﾘﾝｸﾞするときは
+					//　AWUを設定する
+	//AWU設定
+	RCC->RSTSCKR|=0x01;			//128KHzOSC有効
+	while(!(RCC->RSTSCKR&0x02));		//128KHzOSCﾚﾃﾞｨを待つ
+	PWR->AWUPSC=PWR_AWU_Prescaler_64;	//AWUﾌﾟﾘｽｹは1/64
+//	PWR->AWUWR=0x0000003f;			//AWUｶｳﾝﾄ値は63(ﾘｾｯﾄ値)
+						//AWU周期=63*64/128kHz=31.5ms
+
+	//AWUｲﾍﾞﾝﾄ設定
+	EXTI->FTENR|=EXTI_FTENR_TR9;		//TR9をｾｯﾄ
+#endif
+
 //DBG_C('\n');
 //DBG_C('!');
 }
@@ -735,8 +751,10 @@ static void apl_sleep(void)
 		PWR->AWUCSR&=~0x00000002;	//AWUENをﾘｾｯﾄ
 		PWR->AWUCSR|=0x00000002;	//AWUENをｾｯﾄ
 		PWR->CTLR|=0x00000002;		//PDDSをｾｯﾄ
+		EXTI->EVENR|=EXTI_EVENR_MR9;	//AWUｲﾍﾞﾝﾄを許可
 		NVIC->SCTLR|=0x04;		//SLEEPDEEPをｾｯﾄ
 		__WFE();			//StandbyModeへ移行する
+		EXTI->EVENR&=~EXTI_EVENR_MR9;	//AWUｲﾍﾞﾝﾄを禁止
 		SystemInit();			//ｼｽﾃﾑｸﾛｯｸを回復する
 
 		//ADC設定
@@ -903,16 +921,16 @@ static void CB_KOYUU(void)
 #endif
 
 	//操作ﾁｪｯｸ
+#if VOICE_S>0				//音声Sを実装するとき
+					//音声CはSPIを専有するのでﾘｾｯﾄ/ｾｯﾄできない
+	spi_reset();				//SPIﾎﾟｰﾄをﾘｾｯﾄする
+	wait_us(5);				//ﾎﾟｰﾄの電圧安定を待つ
+#endif
 	res=0;					//仮に操作無しにしておく
 #ifdef SW_EN				//SWを実装するとき
 //DBG_C('s');
 	if(!res)				//操作が無かったら
 	{
-#if VOICE_S>0				//音声S再生を実装するとき
-					//音声CはSPIを専有するのでﾘｾｯﾄ/ｾｯﾄできない
-		spi_reset();			//SPIﾎﾟｰﾄをﾘｾｯﾄする
-		wait_us(10);			//SWの電圧安定を待つ
-#endif
 //DBS_H;
 		for(n=0;n<SW_SU;n++)		//SWの実装数まで繰返す
 		{
@@ -923,10 +941,6 @@ static void CB_KOYUU(void)
 			}
 		}
 //DBS_L;
-#if VOICE_S>0				//音声S再生を実装するとき
-					//音声CはSPIを専有するのでﾘｾｯﾄ/ｾｯﾄできない
-		spi_set();			//SPIﾎﾟｰﾄをｾｯﾄする
-#endif
 	}
 //DBG_B(res);
 #endif
@@ -955,6 +969,10 @@ static void CB_KOYUU(void)
 		}
 	}
 //DBG_B(res);
+#endif
+#if VOICE_S>0				//音声Sを実装するとき
+					//音声CはSPIを専有するのでﾘｾｯﾄ/ｾｯﾄできない
+	spi_set();				//SPIﾎﾟｰﾄをｾｯﾄする
 #endif
 
 	//操作の実行
